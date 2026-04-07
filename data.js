@@ -17,7 +17,7 @@ const PORTFOLIO = {
 
   social: {
     linkedin:  "https://www.linkedin.com/in/humendrapun/",
-    github:    "https://github.com/humendrapun",
+    github:    "https://github.com/xantoshpun",
     instagram: "https://instagram.com/xantoshpun",
     resume:    "https://drive.google.com/file/d/1ZL4OMmD4Fs0m-SvoUHt0YCIhbsTmSd8W/view?usp=sharing"
   },

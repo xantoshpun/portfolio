@@ -5,14 +5,14 @@
   --bg:     #060910;
   --bg2:    #0d1117;
   --bg3:    #111827;
-  --cyan:   #00d4ff;
+  --cyan:   #19e6ce;
   --purple: #7c3aed;
   --green:  #10b981;
   --text:   #e2e8f0;
   --muted:  #6b7280;
   --border: rgba(255,255,255,0.07);
   --card:   rgba(255,255,255,0.04);
-  --glow:   0 0 40px rgba(0,212,255,0.12);
+  --glow:   0 0 40px rgba(25,230,206,0.12);
 }
 
 html { scroll-behavior: smooth; }
@@ -99,12 +99,12 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   background: var(--cyan);
   color: var(--bg);
   padding: 0.8rem 2.2rem;
-  border-radius: 8px;
+  border-radius: 999px;
   font-weight: 700;
   font-size: 0.9rem;
   text-decoration: none;
   transition: all 0.25s;
-  box-shadow: 0 0 24px rgba(0,212,255,0.3);
+  box-shadow: 0 0 24px rgba(25,230,206,0.3);
   display: inline-flex; align-items: center;
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,212,255,0.5); }
