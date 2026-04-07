@@ -2,7 +2,7 @@
 import meta from '../data/meta.json';
 ---
 
-<nav>
+<nav id="main-nav" class="nav-hidden">
   <a href="/" class="nav-logo">
     {meta.initials}<span class="logo-muted">.dev</span>
   </a>
@@ -63,4 +63,28 @@ import meta from '../data/meta.json';
     text-decoration: none; transition: all 0.25s;
   }
   .nav-cta:hover { background: var(--cyan); color: var(--bg); }
+
+  /* hidden until hero finishes */
+  .nav-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .nav-visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
 </style>
+
+<script>
+  // Last hero element: delay 1400ms + duration 1000ms = 2400ms
+  setTimeout(() => {
+    const nav = document.getElementById('main-nav');
+    if (nav) {
+      nav.classList.remove('nav-hidden');
+      nav.classList.add('nav-visible');
+    }
+  }, 2400);
+</script>

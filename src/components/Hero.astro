@@ -8,14 +8,14 @@ import meta from '../data/meta.json';
     <div class="hero-hello reveal" style="--d:0ms">
       <span class="hl">&lt;</span> Hello World <span class="hl">/&gt;</span>
     </div>
-    <h1 class="hero-name reveal" style="--d:200ms">
+    <h1 class="hero-name reveal" style="--d:350ms">
       I'm <span class="name-colored">{meta.name}</span>
     </h1>
-    <div class="hero-role reveal" style="--d:400ms">
+    <div class="hero-role reveal" style="--d:700ms">
       <span id="typewriter"></span><span class="cursor"></span>
     </div>
-    <p class="hero-bio reveal" style="--d:600ms">{meta.heroBio}</p>
-    <div class="hero-btns reveal" style="--d:800ms">
+    <p class="hero-bio reveal" style="--d:1050ms">{meta.heroBio}</p>
+    <div class="hero-btns reveal" style="--d:1400ms">
       <a href="#projects" class="btn-primary">View Projects</a>
       <a href="#contact"  class="btn-ghost">Get in Touch</a>
     </div>
@@ -61,8 +61,8 @@ import meta from '../data/meta.json';
   /* ── Staggered entrance ── */
   .reveal {
     opacity: 0;
-    transform: translateY(22px);
-    animation: entrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    transform: translateY(24px);
+    animation: entrance 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: var(--d, 0ms);
   }
   @keyframes entrance {
