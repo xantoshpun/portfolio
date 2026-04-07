@@ -8,7 +8,14 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/projects/bank-churn/)",
       "Bash(curl -s -o /dev/null -w \" %{http_code}\" http://localhost:4321/projects/adventure-works/)",
-      "WebFetch(domain:humendrapun.base44.app)"
+      "WebFetch(domain:humendrapun.base44.app)",
+      "Bash(xargs -I {} bash -c 'echo \"=== {} ===\" && head -30 {}')",
+      "Bash(grep -i \"todo\\\\|fixme\\\\|placeholder\\\\|temp\\\\|test\" /f/Portfolio/src/data/*.json)",
+      "Bash(grep -r \"undefined\\\\|null\\\\|console\\\\\\\\.error\\\\|console\\\\\\\\.warn\" /f/Portfolio/src --include=\"*.astro\" --include=\"*.ts\")",
+      "Bash(grep -n \"25,230,206\\\\|rgba\\(.*0.1.*cyan\\\\|rgba\\(.*0.08.*cyan\" /f/Portfolio/src/styles/global.css /f/Portfolio/src/components/*.astro)",
+      "Bash(grep -c \"order:\" /f/Portfolio/src/content/projects/*.md)",
+      "Bash(grep \"order:\" /f/Portfolio/src/content/projects/*.md)",
+      "Bash(sort -t: -k2 -n)"
     ]
   }
 }
