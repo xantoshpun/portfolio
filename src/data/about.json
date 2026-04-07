@@ -11,11 +11,6 @@
     { "icon": "focus",    "title": "Focused on",               "sub": "Data & ML" }
   ],
   "terminal": {
-    "passion":     "\"turning data into decisions\"",
-    "degree":      "\"MSc Software Engineering\"",
-    "institution": "\"University of West London\"",
-    "location":    "\"United Kingdom\"",
-    "role":        "\"Data Analyst\"",
-    "focus":       "\"Data & ML\""
+    "passion":     "\"turning data into decisions\""
   }
 }

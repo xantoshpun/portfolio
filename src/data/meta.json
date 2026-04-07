@@ -1,13 +1,13 @@
 {
   "name": "Humendra Pun",
-  "initials": "hp",
+  "initials": "HP",
   "location": "United Kingdom",
-  "email": "humendrapun2@gmail.com",
+  "email": "xantoshpun@gmail.com",
   "titles": ["Data Analyst", "Python Developer", "Power BI Specialist", "ML Practitioner"],
   "heroBio": "MSc Software Engineering graduate turning raw data into actionable insights through Python, SQL, Power BI, and machine learning.",
   "social": {
     "linkedin":  "https://www.linkedin.com/in/humendrapun/",
-    "github":    "https://github.com/humendrapun",
+    "github":    "https://github.com/xantoshpun",
     "instagram": "https://instagram.com/xantoshpun",
     "resume":    "https://drive.google.com/file/d/1ZL4OMmD4Fs0m-SvoUHt0YCIhbsTmSd8W/view?usp=sharing"
   }
