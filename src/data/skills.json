@@ -1,32 +1,38 @@
 [
   {
-    "icon": "🐍",
-    "title": "Programming",
-    "color": "cyan",
-    "tags": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "XGBoost", "Jupyter"]
-  },
-  {
     "icon": "🗄️",
-    "title": "Data & Databases",
-    "color": "purple",
-    "tags": ["SQL", "PostgreSQL", "MySQL", "MongoDB", "ETL", "Data Cleaning", "EDA"]
+    "title": "Data Analysis & SQL",
+    "color": "cyan",
+    "tags": ["SQL", "PostgreSQL", "MySQL", "CTEs", "Window Functions", "ETL", "Data Cleaning", "EDA", "Azure Data Studio"]
   },
   {
     "icon": "📊",
-    "title": "Visualisation & BI",
+    "title": "Business Intelligence",
+    "color": "purple",
+    "tags": ["Power BI", "DAX", "Tableau", "Excel", "Pivot Tables", "KPI Design", "Dashboards", "Forecasting"]
+  },
+  {
+    "icon": "🐍",
+    "title": "Python & Programming",
     "color": "green",
-    "tags": ["Power BI", "DAX", "Excel", "Tableau", "Pivot Tables", "Dashboards"]
+    "tags": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter", "Scripting"]
   },
   {
     "icon": "🤖",
     "title": "Machine Learning",
     "color": "cyan",
-    "tags": ["Scikit-learn", "Classification", "Regression", "Feature Engineering", "Statistical Analysis", "A/B Testing", "Time Series"]
+    "tags": ["Scikit-learn", "XGBoost", "Classification", "Regression", "Feature Engineering", "Statistical Analysis", "A/B Testing", "Time Series"]
+  },
+  {
+    "icon": "✨",
+    "title": "AI & Automation",
+    "color": "purple",
+    "tags": ["ChatGPT", "Claude", "Prompt Engineering", "GitHub Copilot", "Power Automate", "Automated Reporting", "OpenAI API"]
   },
   {
     "icon": "⚙️",
     "title": "Tools & Workflow",
-    "color": "purple",
-    "tags": ["Git", "Agile", "VS Code", "Jupyter Notebooks"]
+    "color": "green",
+    "tags": ["Git", "GitHub", "VS Code", "Jupyter Notebooks", "Agile", "Scrum"]
   }
 ]
