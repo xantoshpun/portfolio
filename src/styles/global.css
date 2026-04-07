@@ -35,7 +35,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(rgba(0,212,255,0.04) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(25,230,206,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
   z-index: 0;
@@ -87,10 +87,10 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   font-weight: 500;
   transition: all 0.2s;
 }
-.tag.cyan   { background: rgba(0,212,255,0.07);  border: 1px solid rgba(0,212,255,0.18);  color: var(--cyan); }
+.tag.cyan   { background: rgba(25,230,206,0.07);  border: 1px solid rgba(25,230,206,0.18);  color: var(--cyan); }
 .tag.purple { background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.22); color: #a78bfa; }
 .tag.green  { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2);  color: #34d399; }
-.tag.cyan:hover   { background: rgba(0,212,255,0.15);  border-color: var(--cyan); }
+.tag.cyan:hover   { background: rgba(25,230,206,0.15);  border-color: var(--cyan); }
 .tag.purple:hover { background: rgba(124,58,237,0.18); border-color: #7c3aed; }
 .tag.green:hover  { background: rgba(16,185,129,0.15); border-color: var(--green); }
 
@@ -109,7 +109,7 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   box-shadow: 0 0 24px rgba(25,230,206,0.3);
   display: inline-flex; align-items: center;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,212,255,0.5); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(25,230,206,0.5); }
 
 .btn-ghost {
   background: transparent;
@@ -148,7 +148,7 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   border-radius: 50%;
   background: var(--cyan);
   border: 2px solid var(--bg2);
-  box-shadow: 0 0 8px rgba(0,212,255,0.5);
+  box-shadow: 0 0 8px rgba(25,230,206,0.5);
 }
 .tl-dot.purple { background: #7c3aed; box-shadow: 0 0 8px rgba(124,58,237,0.5); }
 .tl-dot.green  { background: var(--green); box-shadow: 0 0 8px rgba(16,185,129,0.5); }
@@ -160,7 +160,7 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   font-size: 0.7rem; font-weight: 600;
   margin-bottom: 0.55rem; letter-spacing: 0.03em;
 }
-.tl-badge.cyan   { background: rgba(0,212,255,0.08);  border: 1px solid rgba(0,212,255,0.2);  color: var(--cyan); }
+.tl-badge.cyan   { background: rgba(25,230,206,0.08);  border: 1px solid rgba(25,230,206,0.2);  color: var(--cyan); }
 .tl-badge.purple { background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); color: #a78bfa; }
 .tl-badge.green  { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); color: #34d399; }
 .tl-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
