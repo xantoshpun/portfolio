@@ -1,18 +1,18 @@
 [
   {
     "degree": "MSc Software Engineering",
-    "institution": "University of West London · London, UK",
-    "date": "Oct 2023",
+    "institution": "University of West London, UK",
+    "date": "October 2023",
     "honour": "First-Class Honours",
     "honourColor": "cyan",
     "focus": ["Machine Learning", "Big Data Analytics", "Software Engineering", "Security Operations"]
   },
   {
-    "degree": "BSc Computing",
-    "institution": "Coventry University · Coventry, UK",
-    "date": "Jan 2021",
-    "honour": "Upper Second-Class Honours",
+    "degree": "BSc (Hons) Computer Science",
+    "institution": "Coventry University, UK",
+    "date": "March 2022",
+    "honour": "Merit",
     "honourColor": "purple",
-    "focus": ["IoT", "Web Development", "Database Systems", "OOP", "Mobile App Development"]
+    "focus": ["Computer Science Fundamentals", "Software Development", "Database Systems"]
   }
 ]

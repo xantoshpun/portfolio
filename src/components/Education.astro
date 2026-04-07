@@ -1,103 +1,252 @@
 ---
-import education    from '../data/education.json';
-import experience   from '../data/experience.json';
+import education      from '../data/education.json';
+import experience     from '../data/experience.json';
 import certifications from '../data/certifications.json';
 ---
 
 <section id="education">
   <div class="container">
     <div class="section-label">background</div>
-    <h2 class="section-title">Education & Experience</h2>
+    <h2 class="section-title">Education & <span class="hl">Experience</span></h2>
 
+    <!-- Two-column grid -->
     <div class="edu-exp-grid fade-up">
 
-      <!-- Education column -->
-      <div>
-        <p class="col-title">Education</p>
-        <div class="timeline">
-          {education.map((e, i) => (
-            <div class="tl-item">
-              <div class={`tl-dot ${i === 0 ? '' : e.honourColor}`}></div>
-              <div class="tl-date">{e.date}</div>
-              <div class={`tl-badge ${e.honourColor}`}>{e.honour}</div>
-              <div class="tl-title">{e.degree}</div>
-              <div class="tl-org">{e.institution}</div>
-              <div class="tl-tags">
-                {e.focus.map(f => <span class="tl-tag">{f}</span>)}
+      <!-- Education -->
+      <div class="col">
+        <div class="col-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          Education
+        </div>
+        <div class="tl">
+          {education.map(e => (
+            <div class="tl-row">
+              <div class="tl-spine">
+                <div class="tl-bull"></div>
+                <div class="tl-line"></div>
+              </div>
+              <div class="tl-card">
+                <div class="card-top">
+                  <div>
+                    <div class="card-title">{e.degree}</div>
+                    <div class="card-org">{e.institution}</div>
+                  </div>
+                  <span class="card-date">{e.date}</span>
+                </div>
+                {e.honourColor === 'cyan' && (
+                  <div class="honour-badge">{e.honour}</div>
+                )}
+                <div class="card-tags">
+                  {e.focus.map(f => <span class="ctag">{f}</span>)}
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <!-- Experience + Certs column -->
-      <div>
-        <p class="col-title">Experience</p>
-        <div class="timeline">
-          {experience.map(e => (
-            <div class="tl-item">
-              <div class={`tl-dot ${e.badgeColor}`}></div>
-              <div class="tl-date">{e.date}</div>
-              <div class={`tl-badge ${e.badgeColor}`}>{e.badgeText}</div>
-              <div class="tl-title">{e.role}</div>
-              <div class="tl-org">{e.company}</div>
-              <div class="tl-tags">
-                {e.skills.map(s => <span class="tl-tag">{s}</span>)}
-              </div>
-            </div>
-          ))}
+      <!-- Experience -->
+      <div class="col">
+        <div class="col-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          Experience
         </div>
-
-        <p class="col-title" style="margin-top:2.75rem">Certifications</p>
-        <div class="cert-list">
-          {certifications.map(c => (
-            <div class="cert-row">
-              <div class="cert-emoji">{c.icon}</div>
-              <div class="cert-info">
-                <div class="cert-name">{c.name}</div>
-                <div class="cert-meta">{c.issuer}</div>
+        <div class="tl">
+          {experience.map(e => (
+            <div class="tl-row">
+              <div class="tl-spine">
+                <div class="tl-bull"></div>
+                <div class="tl-line"></div>
               </div>
-              <div class="cert-date">{c.date}</div>
+              <div class="tl-card">
+                <div class="card-top">
+                  <div>
+                    <div class="card-title">{e.role}</div>
+                    <div class="card-org">{e.company}</div>
+                  </div>
+                  <span class="card-date">{e.date}</span>
+                </div>
+                <div class="card-tags">
+                  {e.skills.map(s => <span class="ctag">{s}</span>)}
+                </div>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
     </div>
+
+    <!-- Certifications accordion -->
+    <div class="cert-accordion fade-up">
+      <button id="cert-toggle" class="cert-toggle" aria-expanded="false">
+        <span class="cert-toggle-left">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          Certifications
+        </span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div id="cert-body" class="cert-body">
+        <div class="cert-grid">
+          {certifications.map(c => (
+            <div class="cert-card">
+              <div class="cert-card-top">
+                <div class="cert-name">{c.name}</div>
+                <span class="cert-date">{c.date}</span>
+              </div>
+              <div class="cert-issuer">{c.issuer}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <style>
+  .hl { color: var(--cyan); -webkit-text-fill-color: var(--cyan); }
+
+  /* Grid */
   .edu-exp-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
+    margin-bottom: 3rem;
   }
-  .col-title {
+
+  /* Column header */
+  .col-header {
+    display: flex; align-items: center; gap: 0.5rem;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem; font-weight: 700;
     color: var(--cyan); letter-spacing: 0.05em;
-    text-transform: uppercase; margin-bottom: 1.75rem;
+    text-transform: capitalize;
+    margin-bottom: 1.5rem;
   }
 
-  /* cert list */
-  .cert-list { display: flex; flex-direction: column; gap: 0.75rem; }
-  .cert-row {
-    display: flex; align-items: center; gap: 0.9rem;
-    background: var(--card);
+  /* Timeline */
+  .tl { display: flex; flex-direction: column; }
+  .tl-row { display: flex; gap: 1rem; }
+  .tl-spine {
+    display: flex; flex-direction: column; align-items: center;
+    flex-shrink: 0; padding-top: 4px;
+  }
+  .tl-bull {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--cyan);
+    background: var(--bg);
+    position: relative; flex-shrink: 0;
+  }
+  .tl-bull::after {
+    content: ''; position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 7px; height: 7px;
+    border-radius: 50%; background: var(--cyan);
+  }
+  .tl-line {
+    width: 1px; flex: 1;
+    background: linear-gradient(to bottom, var(--cyan), transparent);
+    min-height: 1.5rem; margin-top: 4px;
+  }
+  .tl-row:last-child .tl-line { display: none; }
+
+  /* Card */
+  .tl-card {
+    flex: 1; background: var(--bg3);
     border: 1px solid var(--border);
-    border-radius: 10px; padding: 0.85rem 1rem;
-    transition: border-color 0.2s, transform 0.2s;
+    border-radius: 12px; padding: 1.1rem 1.25rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.25s;
   }
-  .cert-row:hover { border-color: rgba(124,58,237,0.35); transform: translateX(4px); }
-  .cert-emoji { font-size: 1.2rem; flex-shrink: 0; }
-  .cert-info { flex: 1; min-width: 0; }
-  .cert-name { font-size: 0.83rem; font-weight: 600; color: var(--text); line-height: 1.3; }
-  .cert-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
-  .cert-date {
+  .tl-card:hover { border-color: rgba(25,230,206,0.25); }
+  .card-top {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+  .card-title { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+  .card-org   { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+  .card-date  {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem; color: #a78bfa; white-space: nowrap;
+    font-size: 0.7rem; color: var(--cyan);
+    white-space: nowrap; flex-shrink: 0;
   }
 
-  @media (max-width: 900px) { .edu-exp-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  /* First-Class Honours badge */
+  .honour-badge {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 600;
+    color: var(--cyan);
+    background: rgba(25,230,206,0.08);
+    border: 1px solid rgba(25,230,206,0.2);
+    border-radius: 100px;
+    padding: 0.15rem 0.65rem;
+    margin-bottom: 0.65rem;
+  }
+
+  /* Tags */
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+  .ctag {
+    background: var(--bg2); color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.22rem 0.65rem; border-radius: 6px;
+    font-size: 0.72rem; font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Certifications accordion */
+  .cert-accordion { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+
+  .cert-toggle {
+    width: 100%; display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: var(--bg3); border: none; cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--cyan); letter-spacing: 0.04em;
+    transition: background 0.2s;
+  }
+  .cert-toggle:hover { background: rgba(25,230,206,0.05); }
+  .cert-toggle-left { display: flex; align-items: center; gap: 0.5rem; }
+  .chevron { transition: transform 0.3s; color: var(--cyan); }
+  .cert-toggle[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+
+  .cert-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    background: var(--bg2);
+  }
+  .cert-body.open { max-height: 600px; padding: 1.25rem; }
+
+  .cert-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+  }
+  .cert-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.1rem;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(25,230,206,0.25); }
+  .cert-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.25rem; }
+  .cert-name   { font-size: 0.83rem; font-weight: 600; color: var(--text); line-height: 1.35; }
+  .cert-date   { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--cyan); white-space: nowrap; flex-shrink: 0; }
+  .cert-issuer { font-size: 0.72rem; color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .edu-exp-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .cert-grid    { grid-template-columns: 1fr; }
+  }
 </style>
+
+<script>
+  const toggle = document.getElementById('cert-toggle');
+  const body   = document.getElementById('cert-body');
+  toggle?.addEventListener('click', () => {
+    const open = body?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>
