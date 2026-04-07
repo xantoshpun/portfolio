@@ -1,0 +1,18 @@
+[
+  {
+    "role": "Data Analysis Internship",
+    "company": "Victoria Solutions",
+    "date": "Jul 2025",
+    "badgeColor": "green",
+    "badgeText": "Internship",
+    "skills": ["Data Cleaning & Transformation", "Dashboard Development", "Statistical Analysis", "Predictive Modelling"]
+  },
+  {
+    "role": "Data Specialist",
+    "company": "CloudFactory",
+    "date": "Previous Role",
+    "badgeColor": "purple",
+    "badgeText": "Experience",
+    "skills": ["Large-scale Data Workflows", "Team Collaboration", "Data Quality Management"]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "degree": "MSc Software Engineering",
+    "institution": "University of West London · London, UK",
+    "date": "Oct 2023",
+    "honour": "First-Class Honours",
+    "honourColor": "cyan",
+    "focus": ["Machine Learning", "Big Data Analytics", "Software Engineering", "Security Operations"]
+  },
+  {
+    "degree": "BSc Computing",
+    "institution": "Coventry University · Coventry, UK",
+    "date": "Jan 2021",
+    "honour": "Upper Second-Class Honours",
+    "honourColor": "purple",
+    "focus": ["IoT", "Web Development", "Database Systems", "OOP", "Mobile App Development"]
+  }
+]

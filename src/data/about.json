@@ -1,0 +1,15 @@
+{
+  "paragraphs": [
+    "Hi! I'm <strong>Humendra Pun</strong> — a data professional with an MSc in Software Engineering from the <strong>University of West London</strong>, graduated with <strong>First-Class Honours</strong>.",
+    "I specialise in transforming complex datasets into clear, <strong>actionable intelligence</strong> using Python, SQL, Power BI, and Excel. My background spans <strong>machine learning</strong>, big data analytics, and software engineering — giving me both the technical depth and the strategic mindset to solve real business problems.",
+    "I'm passionate about using data to <strong>tell stories</strong> and build models that make a real impact. Whether it's a churn prediction model or an executive dashboard, I focus on insights that <strong>drive decisions</strong>."
+  ],
+  "terminal": {
+    "passion":     "\"turning data into decisions\"",
+    "degree":      "\"MSc Software Engineering\"",
+    "institution": "\"University of West London\"",
+    "location":    "\"United Kingdom\"",
+    "role":        "\"Data Analyst\"",
+    "focus":       "\"Data & ML\""
+  }
+}

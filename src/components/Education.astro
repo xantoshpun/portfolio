@@ -1,0 +1,103 @@
+---
+import education    from '../data/education.json';
+import experience   from '../data/experience.json';
+import certifications from '../data/certifications.json';
+---
+
+<section id="education">
+  <div class="container">
+    <div class="section-label">background</div>
+    <h2 class="section-title">Education & Experience</h2>
+
+    <div class="edu-exp-grid fade-up">
+
+      <!-- Education column -->
+      <div>
+        <p class="col-title">Education</p>
+        <div class="timeline">
+          {education.map((e, i) => (
+            <div class="tl-item">
+              <div class={`tl-dot ${i === 0 ? '' : e.honourColor}`}></div>
+              <div class="tl-date">{e.date}</div>
+              <div class={`tl-badge ${e.honourColor}`}>{e.honour}</div>
+              <div class="tl-title">{e.degree}</div>
+              <div class="tl-org">{e.institution}</div>
+              <div class="tl-tags">
+                {e.focus.map(f => <span class="tl-tag">{f}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Experience + Certs column -->
+      <div>
+        <p class="col-title">Experience</p>
+        <div class="timeline">
+          {experience.map(e => (
+            <div class="tl-item">
+              <div class={`tl-dot ${e.badgeColor}`}></div>
+              <div class="tl-date">{e.date}</div>
+              <div class={`tl-badge ${e.badgeColor}`}>{e.badgeText}</div>
+              <div class="tl-title">{e.role}</div>
+              <div class="tl-org">{e.company}</div>
+              <div class="tl-tags">
+                {e.skills.map(s => <span class="tl-tag">{s}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p class="col-title" style="margin-top:2.75rem">Certifications</p>
+        <div class="cert-list">
+          {certifications.map(c => (
+            <div class="cert-row">
+              <div class="cert-emoji">{c.icon}</div>
+              <div class="cert-info">
+                <div class="cert-name">{c.name}</div>
+                <div class="cert-meta">{c.issuer}</div>
+              </div>
+              <div class="cert-date">{c.date}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .edu-exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .col-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--cyan); letter-spacing: 0.05em;
+    text-transform: uppercase; margin-bottom: 1.75rem;
+  }
+
+  /* cert list */
+  .cert-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .cert-row {
+    display: flex; align-items: center; gap: 0.9rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.85rem 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .cert-row:hover { border-color: rgba(124,58,237,0.35); transform: translateX(4px); }
+  .cert-emoji { font-size: 1.2rem; flex-shrink: 0; }
+  .cert-info { flex: 1; min-width: 0; }
+  .cert-name { font-size: 0.83rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .cert-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+  .cert-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; color: #a78bfa; white-space: nowrap;
+  }
+
+  @media (max-width: 900px) { .edu-exp-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+</style>

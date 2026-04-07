@@ -1,0 +1,66 @@
+---
+import meta from '../data/meta.json';
+---
+
+<nav>
+  <a href="/" class="nav-logo">
+    {meta.initials}<span class="logo-muted">.dev</span>
+  </a>
+
+  <ul class="nav-links hide-mobile">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#skills">Skills</a></li>
+    <li><a href="/#projects">Projects</a></li>
+    <li><a href="/#education">Education</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+
+  <a href={meta.social.resume} target="_blank" rel="noopener" class="nav-cta">
+    Resume →
+  </a>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 2.5rem;
+    background: rgba(6,9,16,0.82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem; font-weight: 700;
+    color: var(--cyan); text-decoration: none;
+  }
+  .logo-muted { color: var(--muted); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.875rem; font-weight: 500;
+    letter-spacing: 0.02em; transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--cyan); transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    padding: 0.45rem 1.1rem; border-radius: 6px;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .nav-cta:hover { background: var(--cyan); color: var(--bg); }
+</style>

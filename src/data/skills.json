@@ -1,0 +1,32 @@
+[
+  {
+    "icon": "🐍",
+    "title": "Programming",
+    "color": "cyan",
+    "tags": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "XGBoost", "Jupyter"]
+  },
+  {
+    "icon": "🗄️",
+    "title": "Data & Databases",
+    "color": "purple",
+    "tags": ["SQL", "PostgreSQL", "MySQL", "MongoDB", "ETL", "Data Cleaning", "EDA"]
+  },
+  {
+    "icon": "📊",
+    "title": "Visualisation & BI",
+    "color": "green",
+    "tags": ["Power BI", "DAX", "Excel", "Tableau", "Pivot Tables", "Dashboards"]
+  },
+  {
+    "icon": "🤖",
+    "title": "Machine Learning",
+    "color": "cyan",
+    "tags": ["Scikit-learn", "Classification", "Regression", "Feature Engineering", "Statistical Analysis", "A/B Testing", "Time Series"]
+  },
+  {
+    "icon": "⚙️",
+    "title": "Tools & Workflow",
+    "color": "purple",
+    "tags": ["Git", "Agile", "VS Code", "Jupyter Notebooks"]
+  }
+]

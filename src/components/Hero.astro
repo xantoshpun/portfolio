@@ -1,0 +1,100 @@
+---
+import meta from '../data/meta.json';
+---
+
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-hello">
+      <span class="hl">&lt;</span> Hello World <span class="hl">/&gt;</span>
+    </div>
+    <h1 class="hero-name">
+      I'm <span class="name-colored">{meta.name}</span>
+    </h1>
+    <div class="hero-role">
+      <span id="typewriter"></span><span class="cursor"></span>
+    </div>
+    <p class="hero-bio">{meta.heroBio}</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact"  class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <a href="#about" class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </a>
+</section>
+
+<script define:vars={{ titles: meta.titles }}>
+  (function () {
+    const el = document.getElementById('typewriter');
+    let pi = 0, ci = 0, deleting = false;
+    function tick() {
+      const cur = titles[pi];
+      el.textContent = deleting ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+      if (!deleting && ci === cur.length) { deleting = true; setTimeout(tick, 2200); return; }
+      if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % titles.length; }
+      setTimeout(tick, deleting ? 48 : 88);
+    }
+    tick();
+  })();
+</script>
+
+<style>
+  #hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 8rem 2rem 5rem; text-align: center;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 820px; }
+  .hero-hello {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem; font-weight: 700;
+    color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.04em;
+  }
+  .hl { color: var(--cyan); }
+  .hero-name {
+    font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 800;
+    letter-spacing: -0.04em; line-height: 1.05;
+    margin-bottom: 1rem; color: #fff;
+  }
+  .name-colored {
+    background: linear-gradient(90deg, var(--cyan), #7c3aed);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--cyan); margin-bottom: 1.75rem; min-height: 2rem;
+  }
+  .cursor {
+    display: inline-block; width: 2px; height: 1.1em;
+    background: var(--cyan); vertical-align: middle;
+    margin-left: 2px; animation: blink 1s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .hero-bio { font-size: 1.05rem; color: var(--muted); max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.85; }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: var(--muted); font-size: 0.7rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; animation: bob 2.2s ease-in-out infinite;
+  }
+  .scroll-line { width: 1px; height: 36px; background: linear-gradient(var(--cyan), transparent); }
+  @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
+</style>

@@ -1,0 +1,54 @@
+---
+const icons = [
+  { slug: 'python',            left: 8,  top: 10 },
+  { slug: 'postgresql',        left: 88, top: 8  },
+  { slug: 'mysql',             left: 5,  top: 50 },
+  { slug: 'jupyter',           left: 92, top: 45 },
+  { slug: 'pandas',            left: 20, top: 80 },
+  { slug: 'git',               left: 75, top: 82 },
+  { slug: 'scikitlearn',       left: 50, top: 12 },
+  { slug: 'tableau',           left: 50, top: 88 },
+  { slug: 'microsoftexcel',    left: 35, top: 40 },
+  { slug: 'microsoftpowerbi',  left: 65, top: 60 },
+];
+---
+
+<div class="bg-floating" aria-hidden="true">
+  {icons.map((icon, i) => {
+    const dur  = 22 + (i * 3.1) % 16;
+    const del  = -(i * 2.3) % 22;
+    const size = 32 + (i * 7) % 14;
+    return (
+      <img
+        class="float-icon"
+        src={`https://cdn.simpleicons.org/${icon.slug}`}
+        alt={icon.slug}
+        width={size}
+        height={size}
+        style={`left:${icon.left}%;top:${icon.top}%;width:${size}px;height:${size}px;animation-duration:${dur}s;animation-delay:${del}s;`}
+      />
+    );
+  })}
+</div>
+
+<style>
+  .bg-floating {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .float-icon {
+    position: absolute;
+    opacity: 0.07;
+    animation: gentle-float ease-in-out infinite;
+    filter: brightness(0) invert(1);
+  }
+  @keyframes gentle-float {
+    0%   { transform: translateY(0px)   rotate(0deg);  }
+    30%  { transform: translateY(-18px) rotate(4deg);  }
+    70%  { transform: translateY(10px)  rotate(-4deg); }
+    100% { transform: translateY(0px)   rotate(0deg);  }
+  }
+</style>
