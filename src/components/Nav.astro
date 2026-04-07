@@ -51,7 +51,9 @@ import meta from '../data/meta.json';
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 100;
-    transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+    transition: background 0.4s ease, border-color 0.4s ease,
+                backdrop-filter 0.4s ease, opacity 0.7s ease,
+                transform 0.7s ease;
     border-bottom: 1px solid transparent;
   }
   nav.scrolled {
@@ -154,8 +156,7 @@ import meta from '../data/meta.json';
   .nav-hidden {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-100%);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(-16px);
   }
   .nav-visible {
     opacity: 1;
