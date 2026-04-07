@@ -3,9 +3,9 @@ import meta from '../data/meta.json';
 
 const links = [
   { href: `mailto:${meta.email}`,    icon: '✉️', bg: 'rgba(0,212,255,0.08)',   label: 'Email',     val: meta.email },
-  { href: meta.social.linkedin,      icon: '💼', bg: 'rgba(10,102,194,0.12)',  label: 'LinkedIn',  val: 'linkedin.com/in/humendrapun' },
-  { href: meta.social.github,        icon: '🐙', bg: 'rgba(255,255,255,0.06)', label: 'GitHub',    val: 'github.com/humendrapun' },
-  { href: meta.social.instagram,     icon: '📷', bg: 'rgba(225,48,108,0.08)', label: 'Instagram', val: 'instagram.com/xantoshpun' },
+  { href: meta.social.linkedin,      icon: '💼', bg: 'rgba(10,102,194,0.12)',  label: 'LinkedIn',  val: meta.social.linkedin },
+  { href: meta.social.github,        icon: '🐙', bg: 'rgba(255,255,255,0.06)', label: 'GitHub',    val: meta.social.github },
+  { href: meta.social.instagram,     icon: '📷', bg: 'rgba(225,48,108,0.08)', label: 'Instagram',  val: meta.social.instagram },
 ];
 ---
 
@@ -65,6 +65,7 @@ const links = [
 </section>
 
 <style>
+  #contact { background: var(--bg2); }
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
