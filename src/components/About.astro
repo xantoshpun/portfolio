@@ -1,61 +1,88 @@
 ---
 import about from '../data/about.json';
+
+const iconMap: Record<string, string> = {
+  degree: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+  work:   `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>`,
+  location: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>`,
+  focus:  `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+};
 ---
 
 <section id="about">
   <div class="container">
     <div class="section-label">about me</div>
-    <h2 class="section-title">Know Who I Am</h2>
+    <h2 class="section-title">Know Who I <span class="hl">Am</span></h2>
 
     <div class="about-grid fade-up">
-      <!-- Text -->
-      <div class="about-text">
-        {about.paragraphs.map(p => (
-          <p set:html={p} />
-        ))}
-      </div>
 
-      <!-- Terminal card -->
-      <div class="terminal-card">
-        <div class="terminal-bar">
-          <span class="t-dot red"></span>
-          <span class="t-dot amber"></span>
-          <span class="t-dot green"></span>
+      <!-- Left: text + terminal -->
+      <div class="about-left">
+        <div class="about-text">
+          {about.paragraphs.map(p => <p set:html={p} />)}
         </div>
-        <div class="terminal-body">
-          <span class="t-prompt">~</span> <span class="t-cmd">cat humendra.json</span>
-          <div class="t-json">
-            <span class="t-brace">{"{"}</span>
-            {Object.entries(about.terminal).map(([k, v], i, arr) => (
-              <div>
-                &nbsp;&nbsp;<span class="t-key">"{k}"</span>
-                <span class="t-colon">: </span>
-                <span class="t-val">{v}</span>
-                {i < arr.length - 1 ? ',' : ''}
-              </div>
-            ))}
-            <span class="t-brace">{"}"}</span>
+
+        <!-- Terminal -->
+        <div class="terminal-card">
+          <div class="terminal-bar">
+            <span class="t-dot red"></span>
+            <span class="t-dot amber"></span>
+            <span class="t-dot green"></span>
+          </div>
+          <div class="terminal-body">
+            <div><span class="t-prompt">$</span> <span class="t-cmd">cat humendra.json</span></div>
+            <div class="t-json">
+              <span class="t-brace">{"{"}</span>
+              {Object.entries(about.terminal).map(([k, v], i, arr) => (
+                <div>
+                  &nbsp;&nbsp;<span class="t-key">"{k}"</span>
+                  <span class="t-colon">: </span>
+                  <span class="t-val">{v}</span>
+                  {i < arr.length - 1 ? ',' : ''}
+                </div>
+              ))}
+              <span class="t-brace">{"}"}</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Right: 2x2 info cards -->
+      <div class="cards-grid">
+        {about.cards.map(card => (
+          <div class="info-card">
+            <span class="card-icon" set:html={iconMap[card.icon]} />
+            <div class="card-title">{card.title}</div>
+            <div class="card-sub">{card.sub}</div>
+          </div>
+        ))}
+      </div>
+
     </div>
   </div>
 </section>
 
 <style>
   #about { background: var(--bg2); }
+
+  .hl { color: var(--cyan); -webkit-text-fill-color: var(--cyan); }
+
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3.5rem; align-items: start;
+    gap: 3.5rem;
+    align-items: start;
   }
+
+  /* ── Left column ── */
+  .about-left { display: flex; flex-direction: column; gap: 2rem; }
   .about-text p { color: var(--muted); line-height: 1.9; margin-bottom: 1rem; font-size: 0.975rem; }
   .about-text :global(strong) { color: var(--text); }
 
-  /* terminal */
+  /* ── Terminal ── */
   .terminal-card {
     background: #0d1117;
-    border: 1px solid rgba(0,212,255,0.15);
+    border: 1px solid rgba(25,230,206,0.15);
     border-radius: 14px; overflow: hidden;
     font-family: 'JetBrains Mono', monospace; font-size: 0.825rem;
   }
@@ -78,5 +105,33 @@ import about from '../data/about.json';
   .t-colon  { color: var(--muted); }
   .t-val    { color: #34d399; }
 
-  @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
+  /* ── 2x2 Cards ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .info-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.55rem;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .info-card:hover {
+    border-color: rgba(25,230,206,0.3);
+    transform: translateY(-3px);
+  }
+  .card-icon { color: var(--cyan); display: flex; }
+  .card-title { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+  .card-sub   { font-size: 0.8rem; color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .cards-grid { grid-template-columns: 1fr; }
+  }
 </style>

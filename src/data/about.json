@@ -4,6 +4,12 @@
     "I specialise in transforming complex datasets into clear, <strong>actionable intelligence</strong> using Python, SQL, Power BI, and Excel. My background spans <strong>machine learning</strong>, big data analytics, and software engineering — giving me both the technical depth and the strategic mindset to solve real business problems.",
     "I'm passionate about using data to <strong>tell stories</strong> and build models that make a real impact. Whether it's a churn prediction model or an executive dashboard, I focus on insights that <strong>drive decisions</strong>."
   ],
+  "cards": [
+    { "icon": "degree",   "title": "MSc Software Engineering", "sub": "University of West London" },
+    { "icon": "work",     "title": "Data Specialist",          "sub": "CloudFactory" },
+    { "icon": "location", "title": "Based in",                 "sub": "United Kingdom" },
+    { "icon": "focus",    "title": "Focused on",               "sub": "Data & ML" }
+  ],
   "terminal": {
     "passion":     "\"turning data into decisions\"",
     "degree":      "\"MSc Software Engineering\"",
