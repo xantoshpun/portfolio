@@ -91,14 +91,14 @@ import certifications from '../data/certifications.json';
         <div class="cert-grid">
           {certifications.map(c => (
             <div class="cert-card">
-              <div class="cert-card-top">
-                <div class="cert-left">
-                  <span class="cert-icon">{c.icon}</span>
-                  <div class="cert-name">{c.name}</div>
-                </div>
+              <div class="cert-card-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              </div>
+              <div class="cert-name">{c.name}</div>
+              <div class="cert-footer">
+                <span class="cert-issuer">{c.issuer}</span>
                 <span class="cert-date">{c.date}</span>
               </div>
-              <div class="cert-issuer">{c.issuer}</div>
             </div>
           ))}
         </div>
@@ -230,16 +230,27 @@ import certifications from '../data/certifications.json';
   .cert-card {
     background: var(--bg3);
     border: 1px solid var(--border);
+    border-left: 2px solid rgba(25,230,206,0.4);
     border-radius: 10px; padding: 1rem 1.1rem;
-    transition: border-color 0.2s;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    transition: border-color 0.2s, transform 0.2s;
   }
-  .cert-card:hover { border-color: rgba(25,230,206,0.25); }
-  .cert-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.25rem; }
-  .cert-left   { display: flex; align-items: flex-start; gap: 0.5rem; }
-  .cert-icon   { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-  .cert-name   { font-size: 0.83rem; font-weight: 600; color: var(--text); line-height: 1.35; }
-  .cert-date   { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--cyan); white-space: nowrap; flex-shrink: 0; }
+  .cert-card:hover {
+    border-color: rgba(25,230,206,0.3);
+    border-left-color: var(--cyan);
+    transform: translateX(3px);
+  }
+  .cert-card-icon {
+    width: 26px; height: 26px; border-radius: 6px;
+    background: rgba(25,230,206,0.08);
+    border: 1px solid rgba(25,230,206,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--cyan); flex-shrink: 0;
+  }
+  .cert-name   { font-size: 0.83rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .cert-footer { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-top: auto; }
   .cert-issuer { font-size: 0.72rem; color: var(--muted); }
+  .cert-date   { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--cyan); white-space: nowrap; flex-shrink: 0; }
 
   @media (max-width: 900px) {
     .edu-exp-grid { grid-template-columns: 1fr; gap: 2rem; }
