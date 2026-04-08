@@ -94,12 +94,24 @@ const siteUrl = 'https://humendra-portfolio.vercel.app';
     });
     btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Scroll-reveal for all .fade-up elements
+    // Scroll-reveal for all animated elements
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
       { threshold: 0.08 }
     );
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    document.querySelectorAll('.fade-up, .fade-left, .stagger-children')
+      .forEach(el => obs.observe(el));
+
+    // Shimmer with slight delay after parent fades in
+    const shimmerObs = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), 300);
+        }
+      }),
+      { threshold: 0.3 }
+    );
+    document.querySelectorAll('.shimmer-ready').forEach(el => shimmerObs.observe(el));
   </script>
 </body>
 </html>

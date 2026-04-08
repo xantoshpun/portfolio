@@ -11,8 +11,8 @@ const iconMap: Record<string, string> = {
 
 <section id="about">
   <div class="container">
-    <div class="section-label">about me</div>
-    <h2 class="section-title">Know Who I <span style="color: var(--cyan);">Am</span></h2>
+    <div class="section-label fade-left">about me</div>
+    <h2 class="section-title fade-up">Know Who I <span class="shimmer-ready" style="color: var(--cyan);">Am</span></h2>
 
     <div class="about-grid fade-up">
 
@@ -48,7 +48,7 @@ const iconMap: Record<string, string> = {
       </div>
 
       <!-- Right: 2x2 info cards -->
-      <div class="cards-grid">
+      <div class="cards-grid stagger-children">
         {about.cards.map(card => (
           <div class="info-card">
             <span class="card-icon" set:html={iconMap[card.icon]} />

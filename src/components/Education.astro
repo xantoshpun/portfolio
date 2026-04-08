@@ -6,8 +6,8 @@ import certifications from '../data/certifications.json';
 
 <section id="education">
   <div class="container">
-    <div class="section-label">background</div>
-    <h2 class="section-title">Education & <span style="color: var(--cyan);">Experience</span></h2>
+    <div class="section-label fade-left">background</div>
+    <h2 class="section-title fade-up">Education & <span class="shimmer-ready" style="color: var(--cyan);">Experience</span></h2>
 
     <!-- Two-column grid -->
     <div class="edu-exp-grid fade-up">
@@ -88,7 +88,7 @@ import certifications from '../data/certifications.json';
       </button>
 
       <div id="cert-body" class="cert-body">
-        <div class="cert-grid">
+        <div class="cert-grid stagger-children">
           {certifications.map(c => (
             <div class="cert-card">
               <div class="cert-card-icon">
@@ -191,6 +191,16 @@ import certifications from '../data/certifications.json';
     padding: 0.15rem 0.65rem;
     margin-bottom: 0.65rem;
   }
+
+  /* Timeline cascade */
+  .tl-row {
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 0.55s var(--ease-spring), transform 0.55s var(--ease-spring);
+  }
+  .edu-exp-grid.visible .tl-row:nth-child(1) { transition-delay: 100ms; }
+  .edu-exp-grid.visible .tl-row:nth-child(2) { transition-delay: 220ms; }
+  .edu-exp-grid.visible .tl-row { opacity: 1; transform: translateX(0); }
 
   /* Tags */
   .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }

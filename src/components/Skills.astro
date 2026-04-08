@@ -10,11 +10,11 @@ const iconBg: Record<string, string> = {
 
 <section id="skills">
   <div class="container">
-    <div class="section-label">skills</div>
-    <h2 class="section-title">My <span style="color: var(--cyan);">Tech Stack</span></h2>
-    <p class="section-sub">Tools and technologies I use to extract insights from data and build intelligent solutions.</p>
+    <div class="section-label fade-left">skills</div>
+    <h2 class="section-title fade-up">My <span class="shimmer-ready" style="color: var(--cyan);">Tech Stack</span></h2>
+    <p class="section-sub fade-up">Tools and technologies I use to extract insights from data and build intelligent solutions.</p>
 
-    <div class="skills-grid fade-up">
+    <div class="skills-grid stagger-children">
       {skills.map(s => (
         <div class="skill-card">
           <div class="skill-card-head">
@@ -36,15 +36,21 @@ const iconBg: Record<string, string> = {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.25rem;
   }
+  @keyframes glow-pulse {
+    0%   { box-shadow: 0 0 0px rgba(25,230,206,0); }
+    50%  { box-shadow: 0 0 22px rgba(25,230,206,0.2); }
+    100% { box-shadow: 0 0 12px rgba(25,230,206,0.1); }
+  }
   .skill-card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px; padding: 1.6rem;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    transition: border-color 0.3s var(--ease-spring), transform 0.3s var(--ease-spring);
   }
   .skill-card:hover {
-    border-color: rgba(0,212,255,0.25);
-    transform: translateY(-4px); box-shadow: var(--glow);
+    border-color: rgba(25,230,206,0.3);
+    transform: translateY(-4px);
+    animation: glow-pulse 0.6s var(--ease-out) forwards;
   }
   .skill-card-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; }
   .skill-icon {

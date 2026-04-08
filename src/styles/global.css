@@ -70,13 +70,54 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   line-height: 1.75;
 }
 
-/* ── Fade-up ── */
+/* ── Animation primitives ── */
+:root {
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Fade up — sections */
 .fade-up {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
+  transform: translateY(32px);
+  transition: opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* Fade left — labels */
+.fade-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s var(--ease-spring), transform 0.6s var(--ease-spring);
+}
+.fade-left.visible { opacity: 1; transform: translateX(0); }
+
+/* Staggered children — cards inside a visible parent */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s var(--ease-spring), transform 0.55s var(--ease-spring);
+}
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 80ms; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 160ms; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 240ms; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 320ms; }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 400ms; }
+.stagger-children.visible > * { opacity: 1; transform: translateY(0); }
+
+/* Shimmer keyframe for cyan accent words */
+@keyframes shimmer-in {
+  0%   { opacity: 0; filter: brightness(2); }
+  40%  { filter: brightness(1.4); }
+  100% { opacity: 1; filter: brightness(1); }
+}
+.shimmer-ready {
+  opacity: 0;
+}
+.shimmer-ready.visible {
+  animation: shimmer-in 0.9s var(--ease-spring) forwards;
+}
 
 /* ── Tag colours ── */
 .tag {
@@ -105,7 +146,7 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   font-weight: 700;
   font-size: 0.9rem;
   text-decoration: none;
-  transition: all 0.25s;
+  transition: all 0.3s var(--ease-spring);
   box-shadow: 0 0 24px rgba(25,230,206,0.3);
   display: inline-flex; align-items: center;
 }

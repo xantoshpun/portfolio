@@ -13,14 +13,14 @@ const iconBg: Record<string, string> = {
 
 <section id="projects">
   <div class="container">
-    <div class="section-label">projects</div>
-    <h2 class="section-title">Featured <span style="color: var(--cyan);">Work</span></h2>
-    <p class="section-sub">
+    <div class="section-label fade-left">projects</div>
+    <h2 class="section-title fade-up">Featured <span class="shimmer-ready" style="color: var(--cyan);">Work</span></h2>
+    <p class="section-sub fade-up">
       Selected projects showcasing my data analysis and visualisation expertise.
       Click any card to see the full case study.
     </p>
 
-    <div class="projects-grid fade-up">
+    <div class="projects-grid stagger-children">
       {projects.map(p => (
         <a href={`/projects/${p.slug}`} class="project-card">
           <div class="proj-header">
