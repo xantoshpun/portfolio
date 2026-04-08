@@ -1,6 +1,6 @@
 [
-  { "icon": "🗄️", "name": "The Complete SQL Bootcamp",                 "issuer": "Udemy",                   "date": "Jul 2025" },
-  { "icon": "📊", "name": "Power BI Desktop for Business Intelligence", "issuer": "Udemy",                   "date": "Jul 2025" },
-  { "icon": "📋", "name": "Microsoft Excel — Beginner to Advanced",     "issuer": "Udemy",                   "date": "Jul 2025" },
-  { "icon": "🐍", "name": "Programming in Python",                      "issuer": "Deerwalk Learning Center", "date": "Apr 2021" }
+  { "img": "icons8-sql-96.png",          "name": "The Complete SQL Bootcamp",                 "issuer": "Udemy",                   "date": "Jul 2025" },
+  { "img": "icons8-power-bi-2021-96.png","name": "Power BI Desktop for Business Intelligence", "issuer": "Udemy",                   "date": "Jul 2025" },
+  { "img": "icons8-excel-96.png",        "name": "Microsoft Excel — Beginner to Advanced",     "issuer": "Udemy",                   "date": "Jul 2025" },
+  { "img": "icons8-python-96.png",       "name": "Programming in Python",                      "issuer": "Deerwalk Learning Center", "date": "Apr 2021" }
 ]
