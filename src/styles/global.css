@@ -70,15 +70,6 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   line-height: 1.75;
 }
 
-/* ── Section dividers ── */
-section + section::before {
-  content: '';
-  display: block;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(25,230,206,0.15), transparent);
-  margin: 0 2rem;
-}
-
 /* ── Fade-up ── */
 .fade-up {
   opacity: 0;
