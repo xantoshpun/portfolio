@@ -48,9 +48,52 @@ const siteUrl = 'https://humendra-portfolio.vercel.app';
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div id="scroll-progress"></div>
   <slot />
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+  <style>
+    #back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg3); color: var(--cyan);
+      border: 1px solid rgba(25,230,206,0.3);
+      font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 99; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
+      transform: translateY(10px);
+    }
+    #back-to-top.visible {
+      opacity: 1; pointer-events: all; transform: translateY(0);
+    }
+    #back-to-top:hover {
+      background: rgba(25,230,206,0.1);
+      box-shadow: 0 0 16px rgba(25,230,206,0.25);
+      transform: translateY(-2px);
+    }
+    #scroll-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; width: 0%;
+      background: var(--cyan);
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(25,230,206,0.6);
+    }
+  </style>
 
   <script>
+    // Scroll progress bar + back to top
+    const bar = document.getElementById('scroll-progress');
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total    = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar) bar.style.width = `${(scrolled / total) * 100}%`;
+      btt?.classList.toggle('visible', scrolled > 400);
+    });
+    btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
     // Scroll-reveal for all .fade-up elements
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),

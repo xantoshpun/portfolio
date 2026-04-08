@@ -90,6 +90,8 @@ import meta from '../data/meta.json';
     letter-spacing: 0.03em; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--cyan); }
+  .nav-links a.active { color: var(--cyan); }
+  .nav-links a.active::after { width: 100%; }
 
   .nav-right { display: flex; align-items: center; gap: 0.75rem; }
 
@@ -181,10 +183,21 @@ import meta from '../data/meta.json';
     }
   }, 2000);
 
-  // Scroll: add frosted glass background
+  // Scroll: frosted glass + active nav link
+  const sections = ['about','skills','projects','education','contact'];
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('main-nav');
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+
+    // Active link spy
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === `/#${current}`);
+    });
   });
 
   // Mobile menu toggle
