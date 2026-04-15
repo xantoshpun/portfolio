@@ -55,6 +55,7 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
 .section-sep::after {
   content: '';
   position: absolute;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 120px;
@@ -275,7 +276,7 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   max-width: 50%;
   margin-inline: auto;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .projects-grid .project-card:last-child:nth-child(odd) {
     max-width: 100%;
   }
@@ -283,9 +284,11 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
 
 /* ── Accessibility: reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }
