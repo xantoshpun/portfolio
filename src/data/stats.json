@@ -1,0 +1,34 @@
+[
+  {
+    "value": 95,
+    "prefix": "",
+    "suffix": "%",
+    "display": "95%",
+    "label": "Model accuracy on best ML project",
+    "accent": "cyan"
+  },
+  {
+    "value": 60,
+    "prefix": "↓",
+    "suffix": "%",
+    "display": "↓60%",
+    "label": "Reporting time reduced via automation",
+    "accent": "purple"
+  },
+  {
+    "value": 10000,
+    "prefix": "",
+    "suffix": "+",
+    "display": "10K+",
+    "label": "Rows processed in data pipelines",
+    "accent": "green"
+  },
+  {
+    "value": 8,
+    "prefix": "",
+    "suffix": "+",
+    "display": "8+",
+    "label": "Projects delivered end-to-end",
+    "accent": "amber"
+  }
+]

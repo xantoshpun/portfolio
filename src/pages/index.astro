@@ -1,14 +1,15 @@
 ---
-import Layout      from '../layouts/Layout.astro';
+import Layout        from '../layouts/Layout.astro';
 import FloatingIcons from '../components/FloatingIcons.astro';
-import Nav         from '../components/Nav.astro';
-import Hero        from '../components/Hero.astro';
-import About       from '../components/About.astro';
-import Skills      from '../components/Skills.astro';
-import Projects    from '../components/Projects.astro';
-import Education   from '../components/Education.astro';
-import Contact     from '../components/Contact.astro';
-import Footer      from '../components/Footer.astro';
+import Nav           from '../components/Nav.astro';
+import Hero          from '../components/Hero.astro';
+import Stats         from '../components/Stats.astro';
+import About         from '../components/About.astro';
+import Skills        from '../components/Skills.astro';
+import Projects      from '../components/Projects.astro';
+import Education     from '../components/Education.astro';
+import Contact       from '../components/Contact.astro';
+import Footer        from '../components/Footer.astro';
 ---
 
 <Layout>
@@ -16,10 +17,17 @@ import Footer      from '../components/Footer.astro';
   <Nav />
   <main>
     <Hero />
+    <div class="section-sep"></div>
+    <Stats />
+    <div class="section-sep"></div>
     <About />
+    <div class="section-sep"></div>
     <Skills />
+    <div class="section-sep"></div>
     <Projects />
+    <div class="section-sep"></div>
     <Education />
+    <div class="section-sep"></div>
     <Contact />
   </main>
   <Footer />

@@ -1,0 +1,119 @@
+---
+import stats from '../data/stats.json';
+---
+
+<section id="stats" aria-label="Key metrics">
+  <div class="container">
+    <div class="stats-grid stagger-children">
+      {stats.map(s => (
+        <div
+          class={`stat-card accent-${s.accent}`}
+          data-value={s.value}
+          data-prefix={s.prefix}
+          data-suffix={s.suffix}
+          data-display={s.display}
+        >
+          <div class={`stat-num accent-${s.accent}`}>
+            <span class="stat-counter">{s.display}</span>
+          </div>
+          <div class="stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>('.stat-card[data-value]');
+
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  function animateCounter(card: HTMLElement) {
+    const target  = parseInt(card.dataset.value  ?? '0', 10);
+    const prefix  = card.dataset.prefix ?? '';
+    const suffix  = card.dataset.suffix ?? '';
+    const display = card.dataset.display ?? '';
+    const el      = card.querySelector<HTMLElement>('.stat-counter');
+    if (!el) return;
+
+    // Skip count-up for non-numeric displays like "10K+"
+    if (isNaN(target) || display.includes('K')) {
+      el.textContent = display;
+      return;
+    }
+
+    const duration = 1200;
+    const start = performance.now();
+
+    function update(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const current = Math.round(easeOut(progress) * target);
+      el.textContent = `${prefix}${current}${suffix}`;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target as HTMLElement);
+        obs.unobserve(entry.target);
+      }
+    }),
+    { threshold: 0.3 }
+  );
+
+  cards.forEach(card => obs.observe(card));
+</script>
+
+<style>
+  #stats {
+    background: var(--bg2);
+    padding: 4rem 2rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .stat-card:hover { transform: translateY(-3px); }
+
+  .stat-card.accent-cyan   { border-color: rgba(25,230,206,0.25); }
+  .stat-card.accent-purple { border-color: rgba(124,58,237,0.25); }
+  .stat-card.accent-green  { border-color: rgba(16,185,129,0.25); }
+  .stat-card.accent-amber  { border-color: rgba(245,158,11,0.25); }
+
+  .stat-num {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.6rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-num.accent-cyan   { color: var(--cyan); }
+  .stat-num.accent-purple { color: var(--purple); }
+  .stat-num.accent-green  { color: var(--green); }
+  .stat-num.accent-amber  { color: #f59e0b; }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 600px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
