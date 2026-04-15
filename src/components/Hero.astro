@@ -5,19 +5,28 @@ import meta from '../data/meta.json';
 <section id="hero">
   <div class="hero-glow"></div>
   <div class="hero-content">
-    <div class="hero-hello reveal" style="--d:0ms">
-      <span class="hl">&lt;</span> HELLO WORLD <span class="hl">/&gt;</span>
+    <div class="hero-left">
+      <div class="hero-hello reveal" style="--d:0ms">
+        <span class="hl">&lt;</span> HELLO WORLD <span class="hl">/&gt;</span>
+      </div>
+      <div class="open-badge reveal" style="--d:100ms">
+        <span class="pulse-dot"></span>
+        Open to Work
+      </div>
+      <h1 class="hero-name reveal" style="--d:350ms">
+        I'm <span class="name-colored">{meta.name}</span>
+      </h1>
+      <div class="hero-role reveal" style="--d:700ms">
+        <span id="typewriter"></span><span class="cursor"></span>
+      </div>
+      <p class="hero-bio reveal" style="--d:1050ms">{meta.heroBio}</p>
+      <div class="hero-btns reveal" style="--d:1400ms">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact"  class="btn-ghost">Get in Touch</a>
+      </div>
     </div>
-    <h1 class="hero-name reveal" style="--d:350ms">
-      I'm <span class="name-colored">{meta.name}</span>
-    </h1>
-    <div class="hero-role reveal" style="--d:700ms">
-      <span id="typewriter"></span><span class="cursor"></span>
-    </div>
-    <p class="hero-bio reveal" style="--d:1050ms">{meta.heroBio}</p>
-    <div class="hero-btns reveal" style="--d:1400ms">
-      <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="#contact"  class="btn-ghost">Get in Touch</a>
+    <div class="hero-avatar reveal" style="--d:200ms" aria-hidden="true">
+      <span class="initials">{meta.initials}</span>
     </div>
   </div>
   <a href="#about" class="hero-scroll">
@@ -47,7 +56,7 @@ import meta from '../data/meta.json';
     min-height: 100vh;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    padding: 8rem 2rem 5rem; text-align: center;
+    padding: 8rem 2rem 5rem;
   }
   .hero-glow {
     position: absolute;
@@ -56,7 +65,53 @@ import meta from '../data/meta.json';
     top: 50%; left: 50%; transform: translate(-50%, -50%);
     pointer-events: none;
   }
-  .hero-content { position: relative; z-index: 1; max-width: 820px; width: 100%; }
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 900px; width: 100%;
+    display: flex; align-items: center; gap: 3rem;
+  }
+  .hero-left { flex: 1; }
+
+  /* ── Open to Work badge ── */
+  .open-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.35);
+    color: #10b981;
+    font-size: 0.7rem; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+  .pulse-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #10b981;
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  /* ── Avatar ── */
+  .hero-avatar {
+    width: 160px; height: 160px; flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(25,230,206,0.08);
+    border: 2px solid rgba(25,230,206,0.35);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .hero-avatar::before {
+    content: '';
+    position: absolute; inset: -4px;
+    border-radius: 50%;
+    border: 1px solid rgba(25,230,206,0.12);
+  }
+  .initials {
+    font-size: 3.25rem; font-weight: 800;
+    color: var(--cyan);
+  }
 
   /* ── Staggered entrance ── */
   .reveal {
@@ -72,20 +127,20 @@ import meta from '../data/meta.json';
     display: inline-block;
     font-family: 'JetBrains Mono', monospace;
     font-size: 1rem; font-weight: 700;
-    color: var(--cyan); margin-bottom: 1.5rem; letter-spacing: 0.04em;
+    color: var(--cyan); margin-bottom: 0.75rem; letter-spacing: 0.04em;
   }
   .hero-name {
-    font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 800;
+    font-size: clamp(2.2rem, 7vw, 5.2rem); font-weight: 800;
     letter-spacing: -0.04em; line-height: 1.05;
     margin-bottom: 1rem; color: #fff;
   }
   .name-colored {
     color: var(--cyan);
-    -webkit-text-fill-color: var(--cyan);
   }
   .hero-role {
     font-family: 'JetBrains Mono', monospace;
     font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 700;
     color: var(--cyan); margin-bottom: 1.75rem; min-height: 2rem;
   }
   .cursor {
@@ -94,8 +149,13 @@ import meta from '../data/meta.json';
     margin-left: 2px; animation: blink 1s infinite;
   }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-  .hero-bio { font-size: 1.05rem; color: var(--muted); max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.85; }
-  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero-bio {
+    font-size: 1.05rem; color: var(--muted);
+    max-width: 520px; margin: 0 0 2.5rem;
+    line-height: 1.85;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
   .hero-scroll {
     position: absolute; bottom: 2.5rem; left: 50%;
     transform: translateX(-50%);
@@ -104,9 +164,25 @@ import meta from '../data/meta.json';
     letter-spacing: 0.14em; text-transform: uppercase;
     text-decoration: none; animation: bob 2.2s ease-in-out infinite;
   }
-  .scroll-line { width: 1px; height: 36px; background: linear-gradient(var(--cyan), transparent); }
-  @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
+  .scroll-line { width: 1px; height: 36px; background: var(--cyan); opacity: 0.5; }
+  @keyframes bob {
+    0%,100%{ transform: translateX(-50%) translateY(0); }
+    50%    { transform: translateX(-50%) translateY(7px); }
+  }
 
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    #hero { padding: 6rem 1.5rem 5rem; }
+    .hero-content {
+      flex-direction: column-reverse;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-avatar { width: 120px; height: 120px; }
+    .initials { font-size: 2.4rem; }
+    .hero-btns { justify-content: center; }
+    .hero-bio { margin-inline: auto; }
+  }
   @media (max-width: 480px) {
     #hero { padding: 6rem 1.25rem 4rem; }
     .hero-bio { font-size: 0.95rem; }
