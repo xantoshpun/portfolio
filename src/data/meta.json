@@ -4,11 +4,11 @@
   "location": "United Kingdom",
   "email": "xantoshpun@gmail.com",
   "titles": ["Data Analyst", "Python Developer", "Power BI Specialist", "ML Practitioner"],
-  "heroBio": "MSc Software Engineering graduate turning raw data into actionable insights through Python, SQL, Power BI, and machine learning.",
+  "heroBio": "I turn messy datasets into clear decisions — building Power BI dashboards, Python pipelines, and ML models that actually get used.",
   "social": {
     "linkedin":  "https://www.linkedin.com/in/humendrapun/",
     "github":    "https://github.com/xantoshpun",
-    "instagram": "https://instagram.com/xantoshpun",
+    "kaggle":    "https://www.kaggle.com/xantoshpun",
     "resume":    "https://drive.google.com/file/d/1ZL4OMmD4Fs0m-SvoUHt0YCIhbsTmSd8W/view?usp=sharing"
   }
 }

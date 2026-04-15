@@ -18,21 +18,21 @@
     "tags": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter", "Scripting"]
   },
   {
+    "icon": "⚙️",
+    "title": "Tools & Workflow",
+    "color": "cyan",
+    "tags": ["Git", "GitHub", "VS Code", "Jupyter Notebooks", "Agile", "Scrum"]
+  },
+  {
     "icon": "🤖",
     "title": "Machine Learning",
-    "color": "cyan",
+    "color": "purple",
     "tags": ["Scikit-learn", "XGBoost", "Classification", "Regression", "Feature Engineering", "Statistical Analysis", "A/B Testing", "Time Series"]
   },
   {
     "icon": "✨",
     "title": "AI & Automation",
-    "color": "purple",
-    "tags": ["ChatGPT", "Claude", "Prompt Engineering", "GitHub Copilot", "Power Automate", "Automated Reporting", "OpenAI API"]
-  },
-  {
-    "icon": "⚙️",
-    "title": "Tools & Workflow",
     "color": "green",
-    "tags": ["Git", "GitHub", "VS Code", "Jupyter Notebooks", "Agile", "Scrum"]
+    "tags": ["ChatGPT", "Claude", "Prompt Engineering", "GitHub Copilot", "Power Automate", "Automated Reporting", "OpenAI API"]
   }
 ]

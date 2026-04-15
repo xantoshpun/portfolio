@@ -8,7 +8,7 @@
     { "icon": "degree",   "title": "MSc Software Engineering", "sub": "University of West London" },
     { "icon": "work",     "title": "Data Specialist",          "sub": "CloudFactory" },
     { "icon": "location", "title": "Based in",                 "sub": "United Kingdom" },
-    { "icon": "focus",    "title": "Focused on",               "sub": "Data & ML" }
+    { "icon": "focus",    "title": "Focused on",               "sub": "Data analysis, ML pipelines & BI dashboards — turning raw data into decisions." }
   ],
   "terminal": {
     "passion":     "\"turning data into decisions\""
