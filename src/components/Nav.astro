@@ -183,6 +183,10 @@ import meta from '../data/meta.json';
     }
   }, 2000);
 
+  // Default: mark first nav link active on load
+  const firstNavLink = document.querySelector('.nav-links a');
+  if (firstNavLink) firstNavLink.classList.add('active');
+
   // Scroll: frosted glass + active nav link
   const sections = ['about','skills','projects','education','contact'];
   window.addEventListener('scroll', () => {
@@ -210,8 +214,11 @@ import meta from '../data/meta.json';
   // Close on link click
   menu?.querySelectorAll('.mobile-link').forEach(link => {
     link.addEventListener('click', () => {
-      toggle?.classList.remove('open');
-      menu.classList.remove('open');
+      setTimeout(() => {
+        menu.classList.remove('open');
+        toggle?.classList.remove('open');
+        document.body.style.overflow = '';
+      }, 150);
     });
   });
 </script>
