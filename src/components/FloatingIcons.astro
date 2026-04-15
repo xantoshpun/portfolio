@@ -19,7 +19,7 @@ const icons = [
 
 <div class="bg-floating" aria-hidden="true">
   {icons.map((icon, i) => {
-    const dur  = 22 + (i * 3.1) % 16;
+    const dur  = 8 + (i * 0.86) % 6;
     const del  = -(i * 2.3) % 22;
     const size = 32 + (i * 5) % 16;
     return (
@@ -45,7 +45,7 @@ const icons = [
   }
   .float-icon {
     position: absolute;
-    opacity: 0.05;
+    opacity: 0.10;
     animation: gentle-float ease-in-out infinite;
   }
   @keyframes gentle-float {
