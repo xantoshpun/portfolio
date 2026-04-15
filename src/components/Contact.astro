@@ -20,9 +20,9 @@ const links = [
     icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`,
   },
   {
-    href: meta.social.instagram, label: 'Instagram', val: meta.social.instagram,
-    bg: 'rgba(225,48,108,0.08)', color: '#f472b6',
-    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>`,
+    href: meta.social.kaggle, label: 'Kaggle', val: 'kaggle.com/xantoshpun',
+    bg: 'rgba(25,230,206,0.08)', color: 'var(--cyan)',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.334z"/></svg>`,
   },
 ];
 ---
@@ -62,10 +62,12 @@ const links = [
             <div class="form-group">
               <label for="f-name">Name</label>
               <input id="f-name" type="text" name="name" placeholder="Your name" required />
+              <span class="field-error" id="err-name">Please enter your name (min 2 characters)</span>
             </div>
             <div class="form-group">
               <label for="f-email">Email</label>
               <input id="f-email" type="email" name="email" placeholder="your@email.com" required />
+              <span class="field-error" id="err-email">Please enter a valid email address</span>
             </div>
           </div>
           <div class="form-group">
@@ -75,6 +77,7 @@ const links = [
           <div class="form-group">
             <label for="f-msg">Message</label>
             <textarea id="f-msg" name="message" placeholder="Tell me more..." required></textarea>
+            <span class="field-error" id="err-msg">Please enter a message (min 10 characters)</span>
           </div>
           <button type="submit" class="form-submit" id="form-btn">Send Message →</button>
         </form>
@@ -119,6 +122,7 @@ const links = [
     text-decoration: none; color: var(--muted); font-size: 0.88rem;
     transition: all 0.22s;
     min-width: 0;
+    min-height: 44px;
   }
   .contact-link:hover { border-color: var(--border); background: var(--card); color: var(--text); }
   .contact-link-icon {
@@ -183,6 +187,17 @@ const links = [
   .feedback-title { font-size: 0.9rem; font-weight: 700; color: var(--text); }
   .feedback-sub   { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
 
+  .field-error {
+    color: #ef4444;
+    font-size: 0.73rem;
+    margin-top: 0.25rem;
+    display: none;
+  }
+  .field-error.visible { display: block; }
+  input.invalid, textarea.invalid {
+    border-color: rgba(239,68,68,0.5);
+  }
+
   @media (max-width: 900px) {
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .form-row { grid-template-columns: 1fr; }
@@ -213,6 +228,31 @@ const links = [
   const btn     = document.getElementById('form-btn')     as HTMLButtonElement;
   const success = document.getElementById('form-success');
   const error   = document.getElementById('form-error');
+
+  // Real-time validation
+  function validateField(input: HTMLInputElement | HTMLTextAreaElement, errorId: string, checkFn: (v: string) => boolean) {
+    const err = document.getElementById(errorId);
+    input.addEventListener('blur', () => {
+      const isValid = checkFn(input.value.trim());
+      input.classList.toggle('invalid', !isValid);
+      err?.classList.toggle('visible', !isValid);
+    });
+    input.addEventListener('input', () => {
+      if (input.classList.contains('invalid')) {
+        const isValid = checkFn(input.value.trim());
+        input.classList.toggle('invalid', !isValid);
+        err?.classList.toggle('visible', !isValid);
+      }
+    });
+  }
+
+  const nameInput  = document.getElementById('f-name') as HTMLInputElement;
+  const emailInput = document.getElementById('f-email') as HTMLInputElement;
+  const msgInput   = document.getElementById('f-msg') as HTMLTextAreaElement;
+
+  if (nameInput)  validateField(nameInput,  'err-name',  v => v.length >= 2);
+  if (emailInput) validateField(emailInput, 'err-email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+  if (msgInput)   validateField(msgInput,   'err-msg',   v => v.length >= 10);
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
