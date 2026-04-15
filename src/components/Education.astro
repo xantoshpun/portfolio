@@ -264,9 +264,24 @@ import certifications from '../data/certifications.json';
   .cert-issuer { font-size: 0.72rem; color: var(--muted); }
   .cert-date   { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--cyan); white-space: nowrap; flex-shrink: 0; }
 
+  .col:first-child .tl-bull {
+    background: var(--purple);
+    box-shadow: 0 0 8px rgba(124,58,237,0.4);
+  }
+
+  .col:first-child .tl-card {
+    border-left: 2px solid rgba(124,58,237,0.3);
+  }
+
   @media (max-width: 900px) {
     .edu-exp-grid { grid-template-columns: 1fr; gap: 2rem; }
     .cert-grid    { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .edu-exp-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
