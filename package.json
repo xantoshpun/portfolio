@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev":   "astro dev",
+    "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
     "astro": "^4.15.0"
   }
 }
