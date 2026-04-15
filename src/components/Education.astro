@@ -92,7 +92,7 @@ import certifications from '../data/certifications.json';
           {certifications.map(c => (
             <div class="cert-card">
               <div class="cert-card-icon">
-                <img src={`/icons/${c.img}`} alt={c.name} width="26" height="26" />
+                <img src={`/icons/${c.img}`} alt={c.name} width="26" height="26" loading="lazy" />
               </div>
               <div class="cert-info">
                 <div class="cert-name">{c.name}</div>
