@@ -21,7 +21,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Inter', sans-serif;
-  line-height: 1.6;
+  line-height: 1.75;
   overflow-x: hidden;
 }
 
@@ -44,6 +44,23 @@ body::before {
 /* ── Shared section ── */
 section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
 .container { max-width: 1020px; margin: 0 auto; }
+
+/* ── Section separator ── */
+.section-sep {
+  height: 1px;
+  background: rgba(255,255,255,0.05);
+  position: relative;
+  z-index: 1;
+}
+.section-sep::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 1px;
+  background: rgba(25,230,206,0.25);
+}
 
 .section-label {
   font-family: 'JetBrains Mono', monospace;
@@ -250,4 +267,25 @@ section { position: relative; z-index: 1; padding: 6.5rem 2rem; }
   .container { padding: 0 1.25rem; }
   .section-title { font-size: clamp(1.5rem, 8vw, 2rem); }
   .btn-primary, .btn-ghost { padding: 0.7rem 1.5rem; font-size: 0.85rem; }
+}
+
+/* ── Odd project card centering ── */
+.projects-grid .project-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  max-width: 50%;
+  margin-inline: auto;
+}
+@media (max-width: 768px) {
+  .projects-grid .project-card:last-child:nth-child(odd) {
+    max-width: 100%;
+  }
+}
+
+/* ── Accessibility: reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
