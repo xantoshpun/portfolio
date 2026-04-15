@@ -232,7 +232,10 @@ const links = [
   // Real-time validation
   function validateField(input: HTMLInputElement | HTMLTextAreaElement, errorId: string, checkFn: (v: string) => boolean) {
     const err = document.getElementById(errorId);
+    let touched = false;
+    input.addEventListener('focus', () => { touched = true; });
     input.addEventListener('blur', () => {
+      if (!touched) return;
       const isValid = checkFn(input.value.trim());
       input.classList.toggle('invalid', !isValid);
       err?.classList.toggle('visible', !isValid);
