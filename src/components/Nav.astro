@@ -23,10 +23,6 @@ import meta from '../data/meta.json';
     </ul>
 
     <div class="nav-right">
-      <div class="open-badge hide-mobile">
-        <span class="pulse-dot"></span>
-        Open to Work
-      </div>
       <a href={meta.social.resume} target="_blank" rel="noopener" class="nav-cta hide-mobile">
         Resume
       </a>
@@ -47,12 +43,6 @@ import meta from '../data/meta.json';
     <a href="/#education" class="mobile-link">Education</a>
     <a href="/#contact"   class="mobile-link">Contact</a>
     <a href={meta.social.resume} target="_blank" rel="noopener" class="mobile-link mobile-resume">Resume</a>
-    <div class="mobile-open-badge-wrap">
-      <div class="open-badge">
-        <span class="pulse-dot"></span>
-        Open to Work
-      </div>
-    </div>
   </div>
 </nav>
 
@@ -115,30 +105,6 @@ import meta from '../data/meta.json';
     transition: background 0.2s, border-color 0.2s;
   }
   .nav-cta:hover { background: rgba(0,212,255,0.1); border-color: var(--cyan); }
-
-  /* Open to Work Badge */
-  .open-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(16,185,129,0.12);
-    border: 1px solid rgba(16,185,129,0.35);
-    color: #10b981;
-    font-size: 0.7rem; font-weight: 600;
-    padding: 0.35rem 0.8rem; border-radius: 20px;
-    letter-spacing: 0.04em;
-  }
-  .pulse-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: #10b981;
-    animation: pulse-dot 1.8s ease-in-out infinite;
-  }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.4; transform: scale(1.4); }
-  }
-  .mobile-open-badge-wrap {
-    padding: 1rem 1.75rem 0;
-    display: flex; justify-content: center;
-  }
 
   /* Hamburger */
   .mobile-toggle {
@@ -208,14 +174,14 @@ import meta from '../data/meta.json';
 </style>
 
 <script>
-  // Reveal after hero animation completes (last delay 1400ms + duration 1000ms)
+  // Reveal smoothly after hero completes
   setTimeout(() => {
     const nav = document.getElementById('main-nav');
     if (nav) {
       nav.classList.remove('nav-hidden');
       nav.classList.add('nav-visible');
     }
-  }, 2000);
+  }, 1800);
 
   // Default: mark first nav link active on load
   const firstNavLink = document.querySelector('.nav-links a');

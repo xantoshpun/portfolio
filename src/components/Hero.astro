@@ -5,44 +5,87 @@ import meta from '../data/meta.json';
 <section id="hero">
   <div class="hero-glow"></div>
   <div class="hero-content">
-    <div class="hero-left">
-      <div class="hero-hello reveal" style="--d:0ms">
-        <span class="hl">&lt;</span> HELLO WORLD <span class="hl">/&gt;</span>
+    <div class="hero-top-row">
+      <div class="hero-text-box bento-green">
+        <div class="hero-hello reveal" style="--d:0ms">
+          <span class="hl">&lt;</span> HELLO WORLD <span class="hl">/&gt;</span>
+        </div>
+        <h1 class="hero-name reveal" style="--d:200ms">
+          I'm <span class="name-colored">{meta.name}</span>
+        </h1>
+        <div class="hero-role reveal" style="--d:400ms">
+          <span id="typewriter">{meta.titles[0]}</span><span class="cursor"></span>
+        </div>
+        <p class="hero-bio reveal" style="--d:600ms">{meta.heroBio}</p>
       </div>
-      <h1 class="hero-name reveal" style="--d:350ms">
-        I'm <span class="name-colored">{meta.name}</span>
-      </h1>
-      <div class="hero-role reveal" style="--d:700ms">
-        <span id="typewriter"></span><span class="cursor"></span>
-      </div>
-      <p class="hero-bio reveal" style="--d:1050ms">{meta.heroBio}</p>
-      <div class="hero-btns reveal" style="--d:1400ms">
-        <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="#contact"  class="btn-ghost">Get in Touch</a>
+      <div class="avatar-column bento-green">
+        <div class="hero-avatar-box reveal" style="--d:800ms">
+          <div class="hero-avatar tilt-card" id="tilt-card" aria-hidden="true">
+            <img src="/pics/2.png" alt="Humendra Pun" class="avatar-img" />
+          </div>
+        </div>
+        <div class="open-badge-box reveal" style="--d:1000ms">
+          <div class="open-badge">
+            <span class="pulse-dot"></span> Open to Work
+          </div>
+        </div>
       </div>
     </div>
-    <div class="hero-avatar reveal" style="--d:200ms" aria-hidden="true">
-      <img src="/pics/2.png" alt="Humendra Pun" class="avatar-img" />
+    
+    <div class="hero-btns-box bento-pink reveal" style="--d:1200ms">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact"  class="btn-ghost">Get in Touch</a>
     </div>
   </div>
   <a href="#about" class="hero-scroll">
     <div class="scroll-line"></div>
     <span>scroll</span>
-  </a>
-</section>
-
 <script define:vars={{ titles: meta.titles }}>
   (function () {
-    const el = document.getElementById('typewriter');
-    let pi = 0, ci = 0, deleting = false;
-    function tick() {
-      const cur = titles[pi];
-      el.textContent = deleting ? cur.slice(0, --ci) : cur.slice(0, ++ci);
-      if (!deleting && ci === cur.length) { deleting = true; setTimeout(tick, 2200); return; }
-      if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % titles.length; }
-      setTimeout(tick, deleting ? 48 : 88);
+    // Start modifying the role after all page animations settle and the user has read it
+    setTimeout(() => {
+      const el = document.getElementById('typewriter');
+      if (!el) return;
+      let pi = 0, ci = titles[0].length, deleting = true;
+      function tick() {
+        const cur = titles[pi];
+        el.textContent = deleting ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+        if (!deleting && ci === cur.length) { deleting = true; setTimeout(tick, 2200); return; }
+        if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % titles.length; }
+        setTimeout(tick, deleting ? 48 : 88);
+      }
+      tick();
+    }, 4000); // 4000ms delay gives everything time to load + pausing for reading
+    
+    // 3. 3D Holographic Tilt Card Logic
+    const card = document.getElementById('tilt-card');
+    if (card) {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        // Calculate tilt
+        const rotX = -((y - centerY) / centerY) * 15;
+        const rotY = ((x - centerX) / centerX) * 15;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.05)`;
+        card.style.boxShadow = `0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(25,230,206,0.2)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+        card.style.boxShadow = `none`;
+        card.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
+      });
+
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.1s ease, box-shadow 0.1s ease';
+      });
     }
-    tick();
+
   })();
 </script>
 
@@ -63,19 +106,40 @@ import meta from '../data/meta.json';
   }
   .hero-content {
     position: relative; z-index: 1;
-    max-width: 900px; width: 100%;
-    display: flex; align-items: center; gap: 3rem;
+    max-width: 960px; width: 100%;
+    display: flex; flex-direction: column; gap: 1rem;
   }
-  .hero-left { flex: 1; }
+  .hero-top-row {
+    display: flex; align-items: stretch; gap: 1rem; width: 100%;
+  }
+  
+  /* ── Layout Box styles ── */
+  .bento-green {
+    padding: 0;
+  }
+  .bento-pink {
+    padding: 0;
+  }
+  
+  .hero-text-box { flex: 1; display: flex; flex-direction: column; }
+  .hero-btns-box { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; align-items: center; width: 100%; }
 
   /* ── Avatar ── */
+  .avatar-column { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; position: relative; }
+  .hero-avatar-box { display: flex; justify-content: center; width: 100%; }
+  .open-badge-box { display: flex; justify-content: center; width: 100%; }
   .hero-avatar {
-    width: 220px; height: 300px; flex-shrink: 0;
+    width: 260px; height: 320px; flex-shrink: 0;
     border-radius: 24px;
     background: rgba(25,230,206,0.08);
     border: 2px solid rgba(25,230,206,0.35);
     display: flex; align-items: center; justify-content: center;
     position: relative;
+    cursor: pointer;
+  }
+  .tilt-card {
+    will-change: transform;
+    transform-style: preserve-3d;
   }
   .hero-avatar::before {
     content: '';
@@ -88,6 +152,56 @@ import meta from '../data/meta.json';
     object-fit: cover;
     border-radius: 24px;
   }
+
+  /* ── Open to Work badge ── */
+  .open-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(16,185,129,0.12);
+    border: 1px solid rgba(16,185,129,0.4);
+    color: #10b981;
+    font-size: 0.75rem; font-weight: 700;
+    padding: 6.5px 18px; border-radius: 20px;
+    letter-spacing: 0.04em;
+    position: relative; overflow: hidden;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(16,185,129,0.1);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+  
+  .open-badge:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16,185,129,0.8);
+    box-shadow: 0 4px 20px rgba(16,185,129,0.25);
+  }
+
+  /* Shimmer sweep effect */
+  .open-badge::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transform: skewX(-20deg);
+    animation: sweep 3.5s infinite ease-in-out;
+  }
+
+  @keyframes sweep {
+    0% { left: -100%; }
+    50% { left: 200%; }
+    100% { left: 200%; } /* Pauses out of frame for the remaining time */
+  }
+
+  .pulse-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #10b981;
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(1.4); }
+  }
+
   .initials {
     font-size: 3.25rem; font-weight: 800;
     color: var(--cyan);
@@ -131,8 +245,9 @@ import meta from '../data/meta.json';
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
   .hero-bio {
     font-size: 1.05rem; color: var(--muted);
-    max-width: 520px; margin: 0 0 2.5rem;
+    max-width: 520px; margin: 0 0 0.5rem;
     line-height: 1.85;
+    min-height: 5.5rem; /* Prevents buttons from jumping while typing */
   }
   .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
