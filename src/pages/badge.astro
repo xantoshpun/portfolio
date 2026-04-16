@@ -1,0 +1,166 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <div class="demo-wrapper">
+    <div style="text-align: center; padding: 4rem 2rem 2rem;">
+      <h1 style="color: var(--cyan); font-size: 2rem;">Badge Placement Options</h1>
+      <p style="color: var(--muted); margin-top: 1rem;">Here are 4 different ways to place the "Open to Work" badge.</p>
+    </div>
+
+    <div class="demo-grid">
+      
+      <!-- Option 1: Floating on Avatar -->
+      <div class="demo-col">
+        <h2 class="demo-title">1. Floating Avatar Badge</h2>
+        <p class="demo-desc">Overlaps the bottom corner of your picture, looking highly integrated.</p>
+        
+        <div class="mock-hero">
+          <div class="mock-text">
+            <h1 class="mock-h1">I'm Humendra Pun</h1>
+            <p class="mock-p">Python Developer • ML Practitioner</p>
+          </div>
+          <div class="mock-avatar">
+            <img src="/pics/2.png" alt="Humendra" class="avatar-img" />
+            <div class="open-badge float-badge">
+              <span class="pulse-dot"></span> Open to Work
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 2: Inline with Name -->
+      <div class="demo-col">
+        <h2 class="demo-title">2. Inline with Name</h2>
+        <p class="demo-desc">Sits right next to your header text so it's the very first thing they read.</p>
+        
+        <div class="mock-hero">
+          <div class="mock-text">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <h1 class="mock-h1" style="margin:0;">I'm Humendra</h1>
+              <div class="open-badge">
+                <span class="pulse-dot"></span> Open to Work
+              </div>
+            </div>
+            <p class="mock-p" style="margin-top: 1rem;">Python Developer • ML Practitioner</p>
+          </div>
+          <div class="mock-avatar">
+            <img src="/pics/2.png" alt="Humendra" class="avatar-img" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 3: Button Row -->
+      <div class="demo-col" style="grid-column: 1 / -1;">
+        <h2 class="demo-title">3. Button Row Integration</h2>
+        <p class="demo-desc">Sits right beside your Call-to-Action buttons.</p>
+        
+        <div class="mock-hero" style="flex-direction: column; align-items: center;">
+          <div style="display: flex; width: 100%; justify-content: center; gap: 4rem;">
+            <div class="mock-text">
+              <h1 class="mock-h1">I'm Humendra Pun</h1>
+              <p class="mock-p">Python Developer • ML Practitioner</p>
+            </div>
+            <div class="mock-avatar">
+              <img src="/pics/2.png" alt="Humendra" class="avatar-img" />
+            </div>
+          </div>
+          
+          <div class="mock-btns">
+            <div class="open-badge">
+              <span class="pulse-dot"></span> Open to Work
+            </div>
+            <div class="mock-btn-primary">View Projects</div>
+            <div class="mock-btn-ghost">Get in Touch</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 4: Sticky Bottom widget (Demo Container) -->
+      <div class="demo-col" style="grid-column: 1 / -1; position: relative;">
+        <h2 class="demo-title">4. Sticky Floating Widget</h2>
+        <p class="demo-desc">The badge stays locked to the bottom corner of the browser forever.</p>
+        
+        <div class="mock-hero" style="min-height: 400px; width: 100%; border: 1px dashed rgba(255,255,255,0.1); justify-content: center; position: relative; overflow: hidden;">
+          <div class="mock-text" style="text-align: center;">
+            <p class="mock-p">This box represents your whole website window.</p><br>
+            <p class="mock-p">The badge stays permanently floating at the bottom right.</p>
+          </div>
+          
+          <!-- Sticky to this demo box, but in reality it'd be screen-sticky -->
+          <div class="open-badge sticky-badge">
+            <span class="pulse-dot"></span> Open to Work
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .demo-wrapper { min-height: 100vh; padding-bottom: 5rem; }
+  .demo-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; padding: 2rem;
+  }
+  .demo-col {
+    display: flex; flex-direction: column; align-items: flex-start;
+    background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);
+  }
+  .demo-title { color: white; font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .demo-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; height: 2.5rem; }
+
+  /* ── MOCK HERO ── */
+  .mock-hero {
+    display: flex; gap: 2rem; width: 100%; align-items: center; justify-content: space-between;
+  }
+  .mock-text { flex: 1; }
+  .mock-h1 { font-size: 1.8rem; font-weight: 800; color: white; margin-bottom: 0.5rem; }
+  .mock-p { font-size: 1rem; color: var(--cyan); font-family: 'JetBrains Mono', monospace; }
+
+  .mock-avatar {
+    width: 140px; height: 180px; flex-shrink: 0;
+    border-radius: 16px; background: rgba(25,230,206,0.08); border: 2px solid rgba(25,230,206,0.35);
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .avatar-img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; opacity: 0.8; }
+
+  .mock-btns {
+    display: flex; gap: 1rem; margin-top: 2rem; align-items: center; width: 100%; justify-content: center;
+    border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 2rem;
+  }
+  .mock-btn-primary { background: var(--cyan); color: #020617; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+  .mock-btn-ghost { border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+
+  /* ── BADGE CORE (Copied from your Hero) ── */
+  .open-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.4);
+    color: #10b981; font-size: 0.75rem; font-weight: 700;
+    padding: 6.5px 18px; border-radius: 20px; letter-spacing: 0.04em;
+    position: relative; overflow: hidden; backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(16,185,129,0.1); z-index: 10;
+  }
+  .pulse-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #10b981;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  /* ── 1. FLOATING OVERRIDE ── */
+  .float-badge {
+    position: absolute;
+    bottom: -12px;
+    left: -20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px rgba(16,185,129,0.2);
+  }
+
+  /* ── 4. STICKY OVERRIDE ── */
+  .sticky-badge {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+
+</style>

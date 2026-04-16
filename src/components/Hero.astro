@@ -24,11 +24,6 @@ import meta from '../data/meta.json';
             <img src="/pics/2.png" alt="Humendra Pun" class="avatar-img" />
           </div>
         </div>
-        <div class="open-badge-box reveal" style="--d:1000ms">
-          <div class="open-badge">
-            <span class="pulse-dot"></span> Open to Work
-          </div>
-        </div>
       </div>
     </div>
     
@@ -40,6 +35,16 @@ import meta from '../data/meta.json';
   <a href="#about" class="hero-scroll">
     <div class="scroll-line"></div>
     <span>scroll</span>
+  </a>
+</section>
+
+<!-- Global sticky badge -->
+<div class="open-badge-fixed reveal" style="--d:1000ms">
+  <div class="open-badge">
+    <span class="pulse-dot"></span> Open to Work
+  </div>
+</div>
+
 <script define:vars={{ titles: meta.titles }}>
   (function () {
     // Start modifying the role after all page animations settle and the user has read it
@@ -154,6 +159,13 @@ import meta from '../data/meta.json';
   }
 
   /* ── Open to Work badge ── */
+  .open-badge-fixed {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 9999;
+  }
+  
   .open-badge {
     display: inline-flex; align-items: center; gap: 6px;
     background: rgba(16,185,129,0.12);
@@ -164,7 +176,7 @@ import meta from '../data/meta.json';
     letter-spacing: 0.04em;
     position: relative; overflow: hidden;
     backdrop-filter: blur(8px);
-    box-shadow: 0 0 15px rgba(16,185,129,0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 15px rgba(16,185,129,0.15);
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     cursor: default;
   }
