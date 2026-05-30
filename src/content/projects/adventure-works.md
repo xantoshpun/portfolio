@@ -8,9 +8,20 @@ summary: "Multi-page interactive Power BI dashboard analysing sales performance,
 tools: ["Power BI", "DAX", "Data Modelling", "What-if Params", "Slicers"]
 metrics: ["$24.9M Revenue", "$10.5M Profit", "25.16K Orders", "2.17% Return Rate", "17.4K Customers"]
 github: "https://github.com/xantoshpun/adventure-works-bike-shop"
-live: ""
+live: "https://app.powerbi.com/view?r=eyJrIjoiNGYxOTQwMDgtYWZlMC00NjQ5LWI4MzEtYTEzYzZkYWE0NzZiIiwidCI6IjAxN2I1N2Y5LTA2YWYtNDJhNS04YzUwLTJjMGM3YTY0Yzc1MyJ9"
 order: 2
 ---
+
+## Live Dashboard
+
+<div style="position:relative;width:100%;padding-top:62.25%;margin:1rem 0 2rem;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
+  <iframe
+    title="Aventure Works - Bike Shop"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+    src="https://app.powerbi.com/view?r=eyJrIjoiNGYxOTQwMDgtYWZlMC00NjQ5LWI4MzEtYTEzYzZkYWE0NzZiIiwidCI6IjAxN2I1N2Y5LTA2YWYtNDJhNS04YzUwLTJjMGM3YTY0Yzc1MyJ9"
+    allowfullscreen="true">
+  </iframe>
+</div>
 
 ## Overview
 
