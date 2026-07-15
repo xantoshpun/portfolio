@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 export interface Props {
   title?: string;
@@ -51,6 +52,8 @@ const siteUrl = 'https://humendra-portfolio.vercel.app';
   
   <!-- Vercel Web Analytics -->
   <Analytics />
+  <!-- Vercel Speed Insights -->
+  <SpeedInsights />
 </head>
 <body>
   <div id="scroll-progress"></div>
