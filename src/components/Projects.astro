@@ -2,7 +2,12 @@
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
+// Render each case study up front so it can live inside its modal on the home page.
+const projects = await Promise.all(
+  allProjects
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async p => ({ p, Content: (await p.render()).Content }))
+);
 
 const iconBg: Record<string, string> = {
   cyan:   'rgba(0,212,255,0.1)',
@@ -21,8 +26,8 @@ const iconBg: Record<string, string> = {
     </p>
 
     <div class="projects-grid stagger-children">
-      {projects.map(p => (
-        <a href={`/projects/${p.slug}`} class="project-card">
+      {projects.map(({ p }) => (
+        <a href={`/projects/${p.slug}`} class="project-card" data-modal={p.slug} aria-haspopup="dialog">
           <div class="proj-header">
             <div class="proj-icon" style={`background:${iconBg[p.data.techColor]}`}>
               {p.data.icon}
@@ -52,8 +57,102 @@ const iconBg: Record<string, string> = {
         </a>
       ))}
     </div>
+
+    {projects.map(({ p, Content }) => (
+      <dialog class="proj-modal" id={`modal-${p.slug}`} aria-labelledby={`modal-title-${p.slug}`}>
+        <button class="modal-close" type="button" aria-label="Close case study" data-close>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="modal-scroll">
+          <header class="modal-head">
+            <div class="proj-icon" style={`background:${iconBg[p.data.techColor]}`}>{p.data.icon}</div>
+            <div class="modal-head-copy">
+              <div class={`proj-tech ${p.data.techColor}`}>{p.data.tech}</div>
+              <h2 class="modal-title" id={`modal-title-${p.slug}`}>{p.data.title}</h2>
+              <p class="proj-summary">{p.data.summary}</p>
+              <div class="proj-metrics">
+                {p.data.metrics.map(m => <span class="metric">{m}</span>)}
+              </div>
+              <div class="modal-tools">
+                {p.data.tools.map(t => <span class="tool-tag">{t}</span>)}
+              </div>
+              <div class="modal-links">
+                {p.data.github && <a href={p.data.github} target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>}
+                {p.data.live && <a href={p.data.live} target="_blank" rel="noopener" class="btn-ghost">Live dashboard</a>}
+              </div>
+            </div>
+          </header>
+          <div class="prose modal-body"><Content /></div>
+        </div>
+      </dialog>
+    ))}
   </div>
 </section>
+
+<script>
+  // ponytail: native <dialog> gives Esc-to-close, focus trapping and the top layer for free.
+  const lockScroll = (on: boolean) => { document.documentElement.style.overflow = on ? 'hidden' : ''; };
+
+  // The URL hash is the source of truth: /#hr-attrition means that modal is open.
+  // Back/forward and shared links all go through sync().
+  let pushedByUs = false; // true when the open modal added its own history entry
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const closeTimers = new Map<HTMLDialogElement, number>();
+
+  // Play the exit animation, then really close (which fires 'close').
+  function closeAnimated(dlg: HTMLDialogElement) {
+    if (!dlg.open || dlg.classList.contains('closing')) return;
+    if (reduceMotion.matches) return dlg.close();
+    dlg.classList.add('closing');
+    // ponytail: timer instead of animationend, which never fires if the tab stops painting. Keep in sync with modal-out (0.22s).
+    closeTimers.set(dlg, window.setTimeout(() => { dlg.classList.remove('closing'); dlg.close(); }, 220));
+  }
+
+  function sync() {
+    const target = location.hash ? document.getElementById(`modal-${location.hash.slice(1)}`) : null;
+    document.querySelectorAll<HTMLDialogElement>('.proj-modal[open]').forEach(d => { if (d !== target) closeAnimated(d); });
+    if (!(target instanceof HTMLDialogElement)) return;
+    if (target.classList.contains('closing')) { // Back then Forward mid-animation: cancel the pending close
+      clearTimeout(closeTimers.get(target));
+      target.classList.remove('closing');
+    }
+    if (!target.open) {
+      target.showModal();
+      target.querySelector('.modal-scroll')?.scrollTo(0, 0);
+      lockScroll(true);
+    }
+  }
+  window.addEventListener('hashchange', sync);
+  sync(); // a shared link like /#hr-attrition opens straight into the modal
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-modal]').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // new-tab clicks still open the full page
+      e.preventDefault();
+      pushedByUs = true;
+      location.hash = card.dataset.modal!; // adds a history entry, fires hashchange -> sync()
+    });
+  });
+
+  document.querySelectorAll<HTMLDialogElement>('.proj-modal').forEach(dlg => {
+    dlg.addEventListener('close', () => {
+      lockScroll(false);
+      if (location.hash !== `#${dlg.id.slice(6)}`) return; // already closed by Back
+      // Closed by X, backdrop or Esc: step back if we added the entry, otherwise just clear
+      // the hash so a visitor who arrived via a shared link isn't sent off the site.
+      if (pushedByUs) history.back();
+      else history.replaceState(null, '', location.pathname + location.search);
+      pushedByUs = false;
+    });
+    // Close on the X button or a click on the dimmed backdrop (the dialog itself, outside the scroll area).
+    dlg.addEventListener('click', e => {
+      const t = e.target as Element;
+      if (t === dlg || t.closest('[data-close]')) closeAnimated(dlg);
+    });
+    // Esc: animate out instead of the browser's instant close.
+    dlg.addEventListener('cancel', e => { e.preventDefault(); closeAnimated(dlg); });
+  });
+</script>
 
 <style>
   #projects { background: var(--bg2); }
@@ -133,7 +232,74 @@ const iconBg: Record<string, string> = {
     font-size: 0.72rem; font-family: 'JetBrains Mono', monospace;
   }
 
+  /* ── Case-study modal ── */
+  .proj-modal {
+    width: min(1100px, calc(100vw - 48px));
+    height: calc(100dvh - 48px);
+    max-width: none; max-height: none;
+    margin: auto; padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg2);
+    color: var(--text);
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), var(--glow);
+  }
+  .proj-modal[open] { animation: modal-in 0.4s var(--ease-spring); }
+  .proj-modal::backdrop {
+    background: rgba(3,5,9,0.75);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    animation: backdrop-in 0.3s ease;
+  }
+  .proj-modal.closing { animation: modal-out 0.22s ease-in forwards; }
+  .proj-modal.closing::backdrop { animation: backdrop-out 0.22s ease-in forwards; }
+  @keyframes modal-in { from { opacity: 0; transform: translateY(24px) scale(0.97); } }
+  @keyframes modal-out { to { opacity: 0; transform: translateY(16px) scale(0.98); } }
+  @keyframes backdrop-in { from { opacity: 0; } }
+  @keyframes backdrop-out { to { opacity: 0; } }
+
+  .modal-scroll {
+    height: 100%; overflow-y: auto; overscroll-behavior: contain;
+    padding: 2.6rem 3rem 3rem;
+  }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--text); cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.25s var(--ease-spring);
+  }
+  .modal-close:hover { border-color: rgba(25,230,206,0.4); color: var(--cyan); transform: rotate(90deg); }
+
+  .modal-head {
+    display: flex; gap: 1.3rem; align-items: flex-start;
+    padding: 0 3rem 2rem 0; margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-head-copy { min-width: 0; }
+  .modal-title {
+    font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+    font-weight: 800; color: #fff; letter-spacing: -0.02em;
+    line-height: 1.15; margin-bottom: 0.7rem;
+  }
+  .modal-head .proj-summary { max-width: 65ch; }
+  .modal-tools { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.7rem; }
+  .modal-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.4rem; }
+  .modal-body { max-width: 860px; }
+  /* Wide markdown tables scroll inside the modal instead of overflowing it. */
+  .modal-body :global(table) { display: block; overflow-x: auto; white-space: nowrap; }
+
   @media (max-width: 900px) {
     .projects-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .proj-modal { width: 100vw; height: 100dvh; border-radius: 0; border: 0; }
+    .modal-scroll { padding: 4.2rem 1.25rem 2.5rem; }
+    .modal-head { flex-direction: column; padding-right: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .proj-modal[open], .proj-modal::backdrop,
+    .proj-modal.closing, .proj-modal.closing::backdrop { animation: none; }
   }
 </style>
