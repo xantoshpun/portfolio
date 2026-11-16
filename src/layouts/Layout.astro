@@ -13,7 +13,8 @@ const {
   description = 'MSc Software Engineering graduate specialising in data analysis, Python, SQL, and Power BI.',
 } = Astro.props;
 
-const siteUrl = 'https://humendra-portfolio.vercel.app';
+// Domain lives in astro.config.mjs (`site`); this is the current page's full URL.
+const siteUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!DOCTYPE html>
 <html lang="en">
