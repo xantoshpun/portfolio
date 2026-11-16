@@ -2,7 +2,20 @@
 
 Personal portfolio website built with Astro. Showcases my projects, skills, education, and experience as a Data Analyst.
 
-🌐 **Live site:** [humendra-portfolio.vercel.app](https://humendra-portfolio.vercel.app)
+🌐 **Live site:** [humendrapun.com](https://www.humendrapun.com)
+
+---
+
+## Projects
+
+Each project opens as a case-study modal on the home page, and every one has a direct link:
+
+| Project | Link |
+|---------|------|
+| Bank Customer Churn Analysis | [humendrapun.com/#bank-churn](https://www.humendrapun.com/#bank-churn) |
+| Adventure Works — Bike Shop Analysis | [humendrapun.com/#adventure-works](https://www.humendrapun.com/#adventure-works) |
+| Brazilian E-Commerce SQL Analysis | [humendrapun.com/#olist-ecommerce](https://www.humendrapun.com/#olist-ecommerce) |
+| IBM HR Employee Attrition Analysis | [humendrapun.com/#hr-attrition](https://www.humendrapun.com/#hr-attrition) |
 
 ---
 
@@ -21,12 +34,14 @@ Personal portfolio website built with Astro. Showcases my projects, skills, educ
 
 ```
 src/
-├── components/       # Astro components (Hero, Nav, About, Skills, etc.)
+├── components/       # Astro components (Hero, Nav, About, Stats, Skills, Projects, etc.)
 ├── content/
-│   └── projects/     # Project detail pages (Markdown)
+│   ├── config.ts     # Frontmatter schema for projects
+│   └── projects/     # Project case studies (Markdown)
 ├── data/             # Site content as JSON
 │   ├── meta.json         # Name, bio, social links
 │   ├── about.json        # About section content
+│   ├── stats.json        # Headline stats strip
 │   ├── skills.json       # Skills cards
 │   ├── education.json    # Education timeline
 │   ├── experience.json   # Work experience
@@ -34,12 +49,16 @@ src/
 ├── layouts/
 │   └── Layout.astro  # Base HTML shell (meta, fonts)
 ├── pages/
-│   ├── index.astro           # Main single page
-│   └── projects/[slug].astro # Dynamic project detail pages
+│   ├── index.astro           # Main single page (projects open as modals, /#<slug>)
+│   ├── projects/[slug].astro # Standalone project pages (fallback without JS)
+│   ├── badge.astro           # Design demo: "Open to Work" badge options
+│   └── demo.astro            # Design demo: avatar hover styles
 └── styles/
     └── global.css    # CSS variables, shared styles
 public/
-└── icons/            # Floating background icons (PNG)
+├── icons/            # Floating background icons (PNG)
+├── pics/             # Profile photos
+└── projects/<slug>/  # Screenshots for each project
 ```
 
 ---
@@ -67,11 +86,12 @@ All content lives in `src/data/` — no code changes needed for most updates.
 |------|-------------|
 | `meta.json` | Name, bio, social links, typewriter titles |
 | `about.json` | About text, info cards, terminal snippet |
+| `stats.json` | Headline stats strip |
 | `skills.json` | Skill cards and tags |
 | `education.json` | Degrees |
 | `experience.json` | Work history |
 | `certifications.json` | Certifications |
-| `src/content/projects/*.md` | Project detail pages |
+| `src/content/projects/*.md` | Project case studies (images go in `public/projects/<slug>/`) |
 
 ---
 
